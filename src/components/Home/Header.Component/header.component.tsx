@@ -1,2 +1,8 @@
-const Header = () => {};
+const Header = () => {
+  return (
+    <>
+      <span></span>
+    </>
+  );
+};
 export default Header;
