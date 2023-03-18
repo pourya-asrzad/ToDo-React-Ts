@@ -2,6 +2,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    margin-left: 1rem;
+    gap: .5rem;
+    margin-top:2rem
 
+}
+.input-search{
+    width: 28rem;
+    height: 2.5rem;
+    border-radius: 0.43rem;
+    border: none;
+    box-shadow: .001rem .2rem .2rem rgba(91, 90, 90, 0.71);
+    outline: none;
+
+}
+.button-search{
+    border:none;
+    background-color: white;
+}
+
+// mobile
+@media (max-width: 37.5rem){
+    .input-search{
+        width: 17rem;
+        height: 2rem;
+    }
 }
