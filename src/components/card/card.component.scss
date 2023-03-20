@@ -1,0 +1,95 @@
+.card-container{
+    display: flex;
+    width: 40%;
+    height:7.5rem;
+    background-color:white;
+    text-align: start;
+    border-radius: 3px;
+    border: 0.001rem solid rgb(220, 216, 216);
+    position: relative;
+    font-size: 0.88rem;
+    box-shadow: .001rem .2rem .2rem rgba(91, 90, 90, 0.71);
+    padding: 1rem;
+    gap:.5rem
+    
+}
+.card-header{
+    display: flex;
+    align-items: center;
+    gap:0.3rem;
+}
+.card-detail{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.card-title{
+    font-size: 1.3rem;
+}
+.card-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 1rem;     /* fallback */
+    max-height: 2rem;      /* fallback */
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+.card-todo-color{
+    border-radius: 50%;
+    background:rgb(255, 98, 0);
+    height:.5rem;
+    width: .5rem;
+}
+.card-buttons{
+    display: flex;
+    flex-direction: column;
+    gap:.4rem;
+}
+.card-button{
+    border-radius: .2rem;
+    border: none;
+    width: 5rem;
+    height:2.5rem;
+    background-color: #8EDBC9;
+    color:black
+    
+}
+
+.card-button:hover{
+    box-shadow: .001rem .2rem .2rem rgba(91, 90, 90, 0.71);
+}
+
+@media (max-width: 52.25rem){
+    .card-container{
+        height: 7.5rem;
+        width: 55%;
+    }
+    
+}
+@media (max-width: 39.68rem){
+    .card-container{
+        height: 7.5rem;
+        width: 85%;
+    }
+    
+}
+@media (max-width: 28.0625rem){
+    .card-container{
+        height: 7.5rem;
+        width: 100%;
+        gap:0.3rem
+    }
+    .card-title{
+        font-size: 1rem;
+    }
+    .card-button{
+        
+        width: 3.5rem;
+        height:1.75rem;
+    }
+    .card-container{
+        height: 6.5rem;
+    }
+    
+}
