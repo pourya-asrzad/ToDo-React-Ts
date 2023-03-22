@@ -1,4 +1,4 @@
-import'./card.component.scss';
+import './card.component.scss';
 const Card=()=>{
     return<>
     <div className='card-container'>
@@ -7,7 +7,7 @@ const Card=()=>{
                 <div className='card-title'>Todo Name</div>
                 <span className='card-todo-color'></span>
             </div>
-            <p className='card-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore impedit atque perspiciatis voluptas esse sunt nam explicabo officia, ex iure culpa laudantium repellat quisquam! Ad facere necessitatibus non distinctio id</p>
+            <p className='card-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore impedit atque perspiciatis voluptas<button className='card-text-option'>more...</button></p>
         </div>
         <div className='card-buttons'>
             <button className='card-button'>Edit</button>

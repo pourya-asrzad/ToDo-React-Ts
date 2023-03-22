@@ -26,14 +26,21 @@
 .card-title{
     font-size: 1.3rem;
 }
-.card-text{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    line-height: 1rem;     /* fallback */
-    max-height: 2rem;      /* fallback */
-    -webkit-line-clamp: 2; /* number of lines to show */
-    -webkit-box-orient: vertical;
+// .card-text{
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     display: -webkit-box;
+//     line-height: 1rem;     /* fallback */
+//     // max-height: 2rem;      /* fallback */
+//     -webkit-line-clamp: 3; /* number of lines to show */
+//     -webkit-box-orient: vertical;
+// }
+.card-text-option{
+    height:1rem ;
+    width: 1rem;
+    font-weight: bold;
+    border: none;
+    background-color: white;
 }
 .card-todo-color{
     border-radius: 50%;
@@ -84,12 +91,14 @@
         font-size: 1rem;
     }
     .card-button{
-        
+
         width: 3.5rem;
         height:1.75rem;
     }
     .card-container{
         height: 6.5rem;
     }
-    
+    .card-text{
+        font-size: .75rem;
+    }
 }
