@@ -1,4 +1,4 @@
-import './card.component.scss'
+import'./card.component.scss';
 const Card=()=>{
     return<>
     <div className='card-container'>
