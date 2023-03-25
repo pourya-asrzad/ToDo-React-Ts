@@ -1,6 +1,6 @@
-import Card from "../../../card/card.component";
+import Cart from "../../../card/card.component";
 
 const ListContainer = () => {
-    return <Card />
+    return <Cart />
 };
 export default ListContainer;
