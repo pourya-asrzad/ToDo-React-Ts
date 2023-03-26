@@ -1,11 +1,11 @@
-import colorTypes from "./types.component/types.component";
+import ColorTypes from "./types.component/types.component";
 
-const responsiveForm = () => {
+const ResponsiveForm = () => {
   return (
     <>
-      <span>MUI FORM</span>
       <span>COlorTypesPlace</span>
+      <ColorTypes />
     </>
   );
 };
-export default responsiveForm;
+export default ResponsiveForm;

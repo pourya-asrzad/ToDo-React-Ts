@@ -1,9 +1,9 @@
-import responsiveForm from "./responsiveForm.component/responsiveForm.component";
+import ResponsiveForm from "./responsiveForm.component/responsiveForm.component";
 
 const AddTodo = () => {
   return (
     <>
-      <span>formplace</span>
+      <ResponsiveForm />
     </>
   );
 };
