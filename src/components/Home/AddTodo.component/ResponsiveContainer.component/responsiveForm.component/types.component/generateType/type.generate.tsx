@@ -35,6 +35,8 @@ const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
           width: "3.5rem",
           height: "2rem",
           color: "#474747",
+          cursor: "pointer",
+          borderRadius: "4px",
           background: `${color.color}`,
         }}
         className={Styles["pallet-item"]}
