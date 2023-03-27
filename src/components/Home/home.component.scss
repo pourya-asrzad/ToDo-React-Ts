@@ -1,5 +1,39 @@
-.home-contianer{
-    display: flex;
-    padding: 3rem;
-    justify-content: space-between;
+.home-contianer {
+  display: flex;
+  position: relative;
+  padding: 3rem;
+  justify-content: space-between;
 }
+
+// @media (max-width: 52.25rem) {
+//   .home-contianer {
+//     grid-template-columns: 50% 20%;
+//   }
+// }
+
+// @media (max-width: 44.75rem) {
+//   .home-contianer {
+//     display: grid;
+//     grid-template-columns: 60% 20%;
+//     padding: 3rem;
+//     justify-content: space-between;
+//   }
+// }
+
+// @media (max-width: 36.25rem) {
+//   .home-contianer {
+//     display: grid;
+//     grid-template-columns: 60% 20%;
+//     padding: 3rem;
+//     justify-content: space-between;
+//   }
+// }
+
+// @media (max-width: 31.25rem) {
+//   .home-contianer {
+//     display: grid;
+//     grid-template-columns: 60% 20%;
+//     padding: 3rem;
+//     justify-content: space-between;
+//   }
+// }
