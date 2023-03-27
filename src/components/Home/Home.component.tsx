@@ -1,12 +1,14 @@
-import Header from "./Header.Component/header.component";
 import ListContainer from "./TodosContainer.component/MUI_Container/list.component";
-import AddTodo from "./AddTodo.component/ResponsiveContainer.component/addTodo.Component";
+
+import ResponsiveForm from "./AddTodo.component/ResponsiveContainer.component/responsiveForm.component/responsiveForm.component";
+import "./home.component.scss";
 const Home = () => {
   return (
     <>
-      <Header />
-      <span>list</span>
-      <span>addtodo</span>
+      <div className="home-contianer">
+        <ListContainer />
+        <ResponsiveForm />
+      </div>
     </>
   );
 };

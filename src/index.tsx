@@ -3,12 +3,16 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./assets/styles/public.scss";
 import "./assets/styles/tweaks.scss";
+import { ApiProvider } from "@reduxjs/toolkit/query/react";
+import { apiSlice } from "./features/api/apiSlice";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ApiProvider api={apiSlice}>
+      <App />
+    </ApiProvider>
   </React.StrictMode>
 );
 
