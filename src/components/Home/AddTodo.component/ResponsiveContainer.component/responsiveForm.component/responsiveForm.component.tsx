@@ -1,11 +1,16 @@
-import colorTypes from "./types.component/types.component";
-
-const responsiveForm = () => {
+import ColorTypes from "./types.component/types.component";
+import Form from "./FormMUI/form.component";
+import Styles from "./responsiveForm.module.scss";
+import AddTodo from "./types.component/addOrEditButton/addEdit.component";
+const ResponsiveForm = () => {
   return (
     <>
-      <span>MUI FORM</span>
-      <span>COlorTypesPlace</span>
+      <div className={Styles["form-container"]}>
+        <Form />
+        <ColorTypes />
+        <AddTodo Action={false} />
+      </div>
     </>
   );
 };
-export default responsiveForm;
+export default ResponsiveForm;
