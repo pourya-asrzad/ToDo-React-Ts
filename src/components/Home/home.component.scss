@@ -5,6 +5,16 @@
   justify-content: space-between;
 }
 
+@media (max-width: 950px) {
+  .home-contianer {
+    display: flex;
+    position: relative;
+    flex-direction: column-reverse;
+    padding: 3rem;
+    justify-content: space-between;
+  }
+}
+
 // @media (max-width: 52.25rem) {
 //   .home-contianer {
 //     grid-template-columns: 50% 20%;

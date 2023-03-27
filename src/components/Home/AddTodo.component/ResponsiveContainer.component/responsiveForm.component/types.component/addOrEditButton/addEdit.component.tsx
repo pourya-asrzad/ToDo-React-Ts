@@ -1,9 +1,9 @@
 import Styles from "./addTodo.module.scss";
-const AddTodo = () => {
+const AddTodo = ({ ...Action }) => {
   return (
     <>
       <button className={Styles["add-todo"]} onClick={() => console.log("")}>
-        AddTodo
+        {Action ? "AddTodo" : "Edit"}
       </button>
     </>
   );

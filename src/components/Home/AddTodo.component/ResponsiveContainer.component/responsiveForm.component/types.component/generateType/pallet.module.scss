@@ -10,6 +10,8 @@
   left: 40%;
   top: 50%;
   z-index: 13;
+  padding: 1rem 1rem;
+  width: 20rem;
   background-color: aliceblue;
 }
 .pallet-modal-layout {
@@ -81,3 +83,18 @@
 //     transition: spin-the-title 1s linear;
 //   }
 // }
+
+@media (max-width: 550px) {
+  .pallet-modal-layout {
+    display: flex;
+
+    position: absolute;
+
+    left: 5%;
+    top: 40%;
+    z-index: 13;
+    padding: 1rem 1rem;
+    width: 20rem;
+    background-color: aliceblue;
+  }
+}
