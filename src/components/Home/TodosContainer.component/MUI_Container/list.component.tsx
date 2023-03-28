@@ -1,12 +1,15 @@
-import Cart from "../../../card/card.component";
 import CardModal from "./cardModal/cardModal.component";
 import React from "react";
 
+import RenderCards from "./renderingCard";
 const ListContainer = () => {
   const [modalDelete, setModalDelete] = React.useState<boolean>(false);
+
+  const content = RenderCards();
+
   return (
     <>
-      <Cart setterDelete={setModalDelete} state={modalDelete} />
+      <div className="">{content}</div>
       <CardModal
         visibility={true}
         state={modalDelete}

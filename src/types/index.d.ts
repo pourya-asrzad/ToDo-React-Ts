@@ -1,1 +1,3 @@
-declare module '*.scss';
+declare module "*.scss";
+declare module "@reduxjs/toolkit/query/react";
+declare module "@reduxjs/toolkit";
