@@ -10,7 +10,7 @@ export const apiSlice = createApi({
     getTodos: builder.query({
       query: () => "/todos",
       transformResponse: (res: any) =>
-        res.sort((a: any, b: any) => b.id - a.id),
+        res.sort((a: any, b: any) => b.createdAt - a.createdAt),
       providesTags: ["Todos"],
     }),
     addTodo: builder.mutation({
