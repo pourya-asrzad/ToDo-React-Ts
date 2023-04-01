@@ -1,0 +1,21 @@
+.input-generator {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-generat {
+  border: none;
+  box-shadow: 1px 1px 3px #e7e7e7;
+  width: inherit;
+  height: 2rem;
+  background-color: rgba(252, 225, 225, 0.933);
+  border-radius: 5px;
+}
+.input-generat:hover {
+  box-shadow: 2px 2px 4px #979797;
+  cursor: pointer;
+}
+.input-generat[type="date"] {
+  text-align: center;
+}

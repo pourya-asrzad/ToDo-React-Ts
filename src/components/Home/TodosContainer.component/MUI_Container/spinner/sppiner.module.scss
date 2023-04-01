@@ -1,0 +1,49 @@
+.outer-Circle {
+  position: fixed;
+  left: 40%;
+  bottom: 40%;
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+  background-color: rgb(37, 37, 37);
+  box-shadow: 3px 3px 5px #ffffff inset;
+  z-index: 10;
+}
+.inner-circle {
+  position: fixed;
+  left: 40%;
+  bottom: 40%;
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+  background-color: rgb(78, 78, 78);
+  box-shadow: 3px 3px 5px #bdbdbd inset;
+}
+
+@keyframes innerCircle {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(360deg);
+  }
+}
+
+@keyframes outerCircle {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .outer-Circle {
+    animation: outerCircle infinite 600ms linear;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .inner-circle {
+    animation: innerCircle infinite 600ms linear;
+  }
+}
