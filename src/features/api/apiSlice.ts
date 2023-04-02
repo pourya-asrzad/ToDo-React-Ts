@@ -1,14 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { API_LINK } from "../../api/apis";
 
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://6347eca8db76843976b5e973.mockapi.io",
+    baseUrl: API_LINK,
   }),
   tagTypes: ["Todos"],
   endpoints: (builder: any) => ({
     getTodos: builder.query({
-      query: () => "/todos",
+      query: () => API_LINK,
       transformResponse: (res: any) =>
         res.sort((a: any, b: any) => b.createdAt - a.createdAt),
       providesTags: ["Todos"],
