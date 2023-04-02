@@ -42,7 +42,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
     }
     setPage(page+1)
   }
-  console.log('items',items);
+ 
   
   
   return !isSuccess ? (
