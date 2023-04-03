@@ -40,7 +40,6 @@ const NotFoundPage = () => {
             fontSize: "large",
             cursor: "pointer",
           }}
-          onClick={() => console.log("emailSent")}
         >
           Send
         </button>
