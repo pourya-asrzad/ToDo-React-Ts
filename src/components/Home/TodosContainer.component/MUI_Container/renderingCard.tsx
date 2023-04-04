@@ -4,6 +4,8 @@ import React, { ReactElement, useEffect } from "react";
 import Styles from "./spinner/sppiner.module.scss";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import {CircularProgress } from '@mui/material'
+import { LIMIT_LINK } from "../../../../api/apis";
+
 
 const RenderCards = (): ReactElement | ReactElement[] => {
   const [modalDelete, setModalDelete] = React.useState<boolean>(false);
@@ -12,12 +14,11 @@ const RenderCards = (): ReactElement | ReactElement[] => {
   const [hasMore,setHasMore] = React.useState<boolean>(true)
   const [page,setPage] = React.useState<number>(2)
   
-  const LIMIT_LINK:any = new URL("https://6347eca8db76843976b5e973.mockapi.io/todos");
+
 
   useEffect(()=>{
     const getData = async ()=>{
-        LIMIT_LINK.searchParams.append('limit', 10);
-        LIMIT_LINK.searchParams.append('page', 1)
+     
         const res = await fetch(LIMIT_LINK);
         const data = await res.json();
         setItems(data);
@@ -37,6 +38,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
     const newData = await fetchNewData()
 
     setItems([...items,...newData])
+
     if(newData.length === 0 || newData.length < 10){
       setHasMore(false)
     }
