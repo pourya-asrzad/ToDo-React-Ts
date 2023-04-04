@@ -21,14 +21,11 @@ const palletStyle = {
 };
 const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
   let palletTab = pallet ? pallet : MAIN_RGB;
-  console.log(palletTab);
 
   ///////////////////////toggle modal
 
   //////////////////////////////////////
   let content = palletTab.map((color, i) => {
-    console.log(color);
-
     return (
       <button
         style={{
