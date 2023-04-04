@@ -17,6 +17,10 @@ const Cart = ({ state, setterDelete }: cardOptions) => {
   const lessButton = () => {
     setToggeleBox(false);
   };
+  const toggleModal = () => {
+    setterDelete(!state);
+    console.log("change");
+  };
   const bull = (
     <Box
       component="span"
@@ -78,10 +82,7 @@ const Cart = ({ state, setterDelete }: cardOptions) => {
             </div>
             <div className={styles["card-buttons"]}>
               <button className={styles["card-button"]}>Edit</button>
-              <button
-                onClick={() => setterDelete(!state)}
-                className={styles["card-button"]}
-              >
+              <button onClick={toggleModal} className={styles["card-button"]}>
                 Delete
               </button>
             </div>

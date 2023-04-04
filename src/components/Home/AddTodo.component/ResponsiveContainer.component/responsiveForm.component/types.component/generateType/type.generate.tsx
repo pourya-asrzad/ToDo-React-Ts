@@ -75,6 +75,7 @@ const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
   }
   return (
     <>
+      {(document.body.style.overflow = "visible")}
       <div className={Styles["pallet-modal-layout-off"]}>
         {content[0]}
         {content[1]}

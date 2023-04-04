@@ -5,7 +5,7 @@ import Styles from "./spinner/sppiner.module.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { CircularProgress } from "@mui/material";
 import SkeletonComponent from "../../../card/skeleton.component";
-
+import CardModal from "./cardModal/cardModal.component";
 const RenderCards = (): ReactElement | ReactElement[] => {
   const [modalDelete, setModalDelete] = useState<boolean>(false);
   // const { data: Todos, isSuccess } = useGetTodosQuery();
@@ -75,6 +75,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
               state={modalDelete}
               key={item.id}
             />
+            <CardModal state={modalDelete} modalSetter={setModalDelete} />
           </>
         );
       })}
