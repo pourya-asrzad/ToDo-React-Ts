@@ -17,9 +17,9 @@ const RenderCards = (): ReactElement | ReactElement[] => {
   const [modalDelete, setModalDelete] = useState<boolean>(false);
   const [items, setItems] = useState<any>(null);
   const [hasMore, setHasMore] = useState<boolean>(true);
-  const [page, setPage] = useState<number>(2);
-  const { data: firstData, isSuccess } = useGetDataQuery(2);
-  const { data: newIncomeData, isSuccess: done } = useGetNewDataQuery(page);
+  const [page, setPage] = useState<number>(1);
+  const { data: firstData, isSuccess } = useGetDataQuery();
+  const { data: newIncomeData, isSuccess: done } = useGetNewDataQuery(page + 1);
   const [newData, setNewData] = useState<any>(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
     }
   }, [isSuccess]);
   useEffect(() => {
-    if (done && hasMore !== false) {
+    if (done) {
       setNewData(newIncomeData);
     }
   }, [done, page, newIncomeData]);
@@ -39,7 +39,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
     // console.log("newIncomeData", newData);
 
     setItems([...items, ...newData]);
-    if (newData.length === 0 || newData.length < 10) {
+    if (newData.length === 0) {
       console.log("finished", items);
 
       setHasMore(false);
