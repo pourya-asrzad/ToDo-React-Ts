@@ -1,7 +1,7 @@
 import {
   useGetTodosQuery,
   useGetDataQuery,
-  useGetNewData,
+  useGetNewDataQuery,
   fetchNewData,
 } from "../../../../features/api/apiSlice";
 import Cart from "../../../card/card.component";
@@ -11,54 +11,43 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { CircularProgress } from "@mui/material";
 import SkeletonComponent from "../../../card/skeleton.component";
 import CardModal from "./cardModal/cardModal.component";
+//////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 const RenderCards = (): ReactElement | ReactElement[] => {
   const [modalDelete, setModalDelete] = useState<boolean>(false);
-  // const { data: Todos, isSuccess } = useGetTodosQuery();
   const [items, setItems] = useState<any>(null);
-  const [newItems, setNewItems] = useState<any>(null);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState<number>(2);
-  const { data: firstData, isSuccess } = useGetDataQuery();
-  //const { data: newIncomeData, isSuccess: isCompelete } = useGetNewData(page);
-  //const { data: newGetData, isSuccess: isCompelete } = useGetNewData();
-  //const hoop = isCompelete ? newGetData : null;
-  //console.log("hh", hoop);
-
-  const LIMIT_LINK: any = new URL(
-    "https://6347eca8db76843976b5e973.mockapi.io/todos"
-  );
-  console.log(LIMIT_LINK);
-
-  // useEffect(() => {
-  //   console.log("object");
-  // }, []);
-  let initialized = false;
+  const { data: firstData, isSuccess } = useGetDataQuery(2);
+  const { data: newIncomeData, isSuccess: done } = useGetNewDataQuery(page);
+  const [newData, setNewData] = useState<any>(null);
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(firstData);
       setItems(firstData);
     }
-    initialized = true;
   }, [isSuccess]);
-  //////////////////////////////////
-  // useEffect(() => {
-  //   if (isCompelete) {
-  //     setNewItems(newIncomeData);
-  //     console.log(newItems);
-  //   }
-  // }, [isCompelete, newIncomeData]);
-  ///////////////////////////////////////////////
+  useEffect(() => {
+    if (done && hasMore !== false) {
+      setNewData(newIncomeData);
+    }
+  }, [done, page, newIncomeData]);
 
-  const fetchMoreData = async () => {
-    const newData = await fetchNewData(LIMIT_LINK, page);
-    console.log([...items, ...newData]);
+  //////////////////////////////////
+  const fetchMoreData = () => {
+    // console.log([...items, ...newData]);
+    // console.log("newIncomeData", newData);
+
     setItems([...items, ...newData]);
     if (newData.length === 0 || newData.length < 10) {
+      console.log("finished", items);
+
       setHasMore(false);
     }
     setPage(page + 1);
   };
+  ///////////////////////////////////////////////
+
   return items ? (
     <InfiniteScroll
       dataLength={items.length}

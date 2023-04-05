@@ -3,17 +3,31 @@ import { API_LINK } from "../../api/apis";
 const LIMIT_LINK: any = new URL(
   "https://6347eca8db76843976b5e973.mockapi.io/todos"
 );
-function LinkParams(LIMIT_LINK: any) {
-  LIMIT_LINK.searchParams.append("limit", 5);
-  LIMIT_LINK.searchParams.append("page", 1);
+const LIMIT_LINK2: any = new URL(
+  "https://6347eca8db76843976b5e973.mockapi.io/todos"
+);
+function LinkParams(
+  LIMIT_LINK: any,
+  limit: number = 5,
+  page: string | number = 2
+) {
+  if (page === 2) {
+  }
+  LIMIT_LINK.searchParams.append("limit", limit);
+  LIMIT_LINK.searchParams.append("page", page);
+  console.log(LIMIT_LINK.href);
+
   return LIMIT_LINK.href;
 }
 function LinkNewParams(LIMIT_LINK: any, page: string | number) {
+  LIMIT_LINK.searchParams.delete("limit");
+  LIMIT_LINK.searchParams.delete("page");
   LIMIT_LINK.searchParams.append("limit", 10);
   LIMIT_LINK.searchParams.append("page", `${page}`);
+  console.log(LIMIT_LINK.href);
+
   return LIMIT_LINK.href;
 }
-// }
 
 export const apiSlice = createApi({
   reducerPath: "api",
@@ -26,6 +40,13 @@ export const apiSlice = createApi({
       query: () => API_LINK,
       transformResponse: (res: any) =>
         res.sort((a: any, b: any) => b.createdAt - a.createdAt),
+      providesTags: ["Todos"],
+    }),
+    getNewData: builder.query({
+      query: (page: string | number) => LinkNewParams(LIMIT_LINK2, page),
+      transformResponse: (res: any) => {
+        return res;
+      },
       providesTags: ["Todos"],
     }),
     addTodo: builder.mutation({
@@ -43,13 +64,7 @@ export const apiSlice = createApi({
       },
       providesTags: ["Todos"],
     }),
-    getNewData: builder.query({
-      query: (page: string | number) => LinkNewParams(LIMIT_LINK, page),
-      transformResponse: (res: any) => {
-        return res;
-      },
-      providesTags: ["Todos"],
-    }),
+
     updateTodo: builder.mutation({
       query: (todo: any) => ({
         url: `/todos/${todo.id}`,
@@ -72,13 +87,13 @@ export const apiSlice = createApi({
 export const {
   useGetTodosQuery,
   useGetDataQuery,
-  useGetNewData,
+  useGetNewDataQuery,
   useAddTodoMutation,
   useUpdateTodoMutation,
   useDeleteTodoMutation,
 } = apiSlice;
 
-export  const fetchNewData = async (LIMIT_LINK:any,page:string|number) => {
+export const fetchNewData = async (LIMIT_LINK: any, page: string | number) => {
   LIMIT_LINK.searchParams.append("limit", 10);
   LIMIT_LINK.searchParams.append("page", `${page}`);
   const res = await fetch(LIMIT_LINK);

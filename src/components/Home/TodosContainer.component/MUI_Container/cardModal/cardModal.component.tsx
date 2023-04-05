@@ -10,19 +10,14 @@ type CardModal = {
   state: boolean;
 };
 const CardModal = ({ modalSetter, state }: CardModal): ReactElement => {
-  const [currentCardY, setCurrentCardY] = React.useState<number>(0);
-  const [currentCardX, setCurrentCardX] = React.useState<number>(0);
-
   ////////////////////////hndle position
 
   ///////////////////////////////////////////////////////////
   React.useEffect(() => {
     if (state) {
-      window.scrollTo(0, 0);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "visible";
-      window.scrollTo(currentCardX, currentCardY);
     }
   }, [state]);
   return (
