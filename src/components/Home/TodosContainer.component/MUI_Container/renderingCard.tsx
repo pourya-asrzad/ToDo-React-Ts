@@ -4,6 +4,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import Styles from "./spinner/sppiner.module.scss";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import {CircularProgress } from '@mui/material'
+import SkeletonComponent  from "../../../card/skeleton.component"
 
 const RenderCards = (): ReactElement | ReactElement[] => {
   const [modalDelete, setModalDelete] = React.useState<boolean>(false);
@@ -13,6 +14,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
   const [page,setPage] = React.useState<number>(2)
   
   const LIMIT_LINK:any = new URL("https://6347eca8db76843976b5e973.mockapi.io/todos");
+
 
   useEffect(()=>{
     const getData = async ()=>{
@@ -25,8 +27,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
         setItems(data);
       };
       getData();
-      initialized = true;
-    }
+    
   }, []);
 
   const fetchNewData = async () => {
@@ -61,7 +62,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
       {items.map((item: any) => {
         return (
           <>
-            <SkeletonComponent />
+            <SkeletonComponent  />
             <Cart
               setterDelete={setModalDelete}
               state={modalDelete}
