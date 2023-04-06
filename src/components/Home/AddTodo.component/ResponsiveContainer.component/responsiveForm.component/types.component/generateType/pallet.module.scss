@@ -1,6 +1,6 @@
 .pallet-item {
   border: none;
-  margin: 1rem 0.5rem;
+  margin: 1rem 0.7rem;
 }
 .pallet-item:hover {
   box-shadow: 2px 2px 4px #ddd;
@@ -47,7 +47,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-left: 1.3rem;
 }
 .pallet-modal-layout-off > button {
   flex-wrap: nowrap;
@@ -83,8 +85,11 @@
   cursor: pointer;
 }
 .span-more:hover {
-  font-size: large;
   font-weight: bold;
+  color: rgb(0, 0, 0);
+}
+.pallet-item:hover {
+  font-weight: bolder;
 }
 // @keyframes spin-the-title {
 //   from {

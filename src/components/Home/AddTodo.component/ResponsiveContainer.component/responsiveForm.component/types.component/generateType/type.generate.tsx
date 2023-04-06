@@ -30,8 +30,9 @@ const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
     return (
       <button
         style={{
-          width: state ? "4.5rem" : "3rem",
-          height: state ? "3.2rem" : "2rem",
+          width: state ? "4.7rem" : "3.5rem",
+          height: state ? "3.2rem" : "2.4rem",
+          fontSize: state ? "large" : "small",
           color: "#474747",
           cursor: "pointer",
           borderRadius: "4px",
@@ -44,7 +45,7 @@ const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
       </button>
     );
   });
-
+  document.body.style.overflow = state ? "hidden" : "visible";
   if (state) {
     document.body.style.overflow = "hidden";
     return (

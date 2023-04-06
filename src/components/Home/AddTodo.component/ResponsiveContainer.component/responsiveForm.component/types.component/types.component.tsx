@@ -9,22 +9,12 @@ const ColorTypes = () => {
   const [windowSize, setWindowSize] = React.useState<
     number | string | undefined
   >();
-  useEffect(() => {
-    function hndleResize() {
-      setWindowSize(getWindowSize());
-      console.log(getWindowSize());
-    }
-    window.addEventListener("resize", hndleResize);
-    return () => {
-      window.removeEventListener("resize", hndleResize);
-    };
-  }, []);
 
   return (
     <>
       <div
         className={modal ? Styles["pallet-modal-layout"] : Styles["modal-off"]}
-        style={{ height: windowSize + "px" }}
+        style={{ height: windowSize }}
       >
         <TypeGenerator modalSetter={setModal} state={modal} />
       </div>

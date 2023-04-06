@@ -1,15 +1,16 @@
 .card-container {
   display: flex;
+  position: relative;
   width: 38rem;
   height: 13rem;
   background-color: white;
   text-align: start;
-border: .5px solid rgb(222, 221, 221);
+  border: 0.5px solid rgb(222, 221, 221);
   // max-height: 10rem;
   padding: 4px;
   margin-bottom: 1rem;
   gap: 0.5rem;
-  border-radius: 10px
+  border-radius: 10px;
 }
 .card-container-toggle {
   @extend .card-container;
@@ -209,17 +210,17 @@ border: .5px solid rgb(222, 221, 221);
   }
 }
 
-.skeleton{
+.skeleton {
   @extend .card-container;
   display: block;
   height: 10rem;
 }
-.emptydiv{
+.emptydiv {
   width: 70%;
 }
-.header{
+.header {
   display: flex;
 }
-.header-skeleton{
+.header-skeleton {
   width: 28%;
 }
