@@ -2,7 +2,7 @@ import {
   useGetTodosQuery,
   useGetDataQuery,
   useGetNewDataQuery,
-  fetchNewData,
+  useFetchTodoLengthQuery,
 } from "../../../../features/api/apiSlice";
 import Cart from "../../../card/card.component";
 import React, { ReactElement, useEffect, useState } from "react";
@@ -19,7 +19,8 @@ const RenderCards = (): ReactElement | ReactElement[] => {
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState<number>(2);
   const { data: firstData, isSuccess } = useGetDataQuery();
-
+  const { data: againData } = useGetNewDataQuery(page);
+  const { data } = useFetchTodoLengthQuery();
   useEffect(() => {
     if (isSuccess) {
       setItems(firstData);
@@ -28,18 +29,16 @@ const RenderCards = (): ReactElement | ReactElement[] => {
 
   //////////////////////////////////
   const fetchMoreData = async () => {
-    const newItem = await fetchNewData(page);
-    setItems([...items, ...newItem]);
-    if (newItem.length === 0 || newItem.length < 10) {
-      console.log("finished", newItem);
-
+    setItems([...items, ...againData]);
+    if (items.length + againData.length === data) {
+      console.log("object");
       setHasMore(false);
     }
     setPage(page + 1);
   };
   ///////////////////////////////////////////////
-
-  return items ? (
+  console.log(items);
+  return isSuccess && items ? (
     <InfiniteScroll
       dataLength={items.length}
       next={fetchMoreData}
