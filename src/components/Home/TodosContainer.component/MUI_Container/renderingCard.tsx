@@ -28,8 +28,6 @@ const RenderCards = (): ReactElement | ReactElement[] => {
   } = useGetDataQuery();
   const { data: newData, isError: errorInNewData } = useGetNewDataQuery(page);
   const { data: dataLength } = useFetchTodoLengthQuery();
-
-  console.log(errorInFirstData);
   useEffect(() => {
     if (isSuccess) {
       setItems(firstData);
@@ -40,7 +38,6 @@ const RenderCards = (): ReactElement | ReactElement[] => {
   const fetchMoreData = async () => {
     setItems([...items, ...newData]);
     if (items.length + newData.length === dataLength) {
-      console.log("object");
       setHasMore(false);
     }
     setPage(page + 1);

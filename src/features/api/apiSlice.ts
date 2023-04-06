@@ -32,7 +32,6 @@ export const apiSlice = createApi({
     }),
     getNewData: builder.query({
       query: (page:number) =>{
-      console.log(page);
         return API_LINK + `?limit=10&page=${page}`
       },
    
