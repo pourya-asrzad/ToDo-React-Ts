@@ -1,16 +1,18 @@
+import ErrorImage from "../../../../assets/images/404.jpg";
+import Styles from "./todocontainer.module.scss";
+import NoConnection from "../../../../assets/images/noconnection.avif";
 import {
   useGetTodosQuery,
   useGetDataQuery,
   useGetNewDataQuery,
-  fetchNewData,
+  useFetchTodoLengthQuery,
 } from "../../../../features/api/apiSlice";
 import Cart from "../../../card/card.component";
-import React, { ReactElement, useEffect, useState } from "react";
-import Styles from "./spinner/sppiner.module.scss";
+import { ReactElement, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { CircularProgress } from "@mui/material";
 import SkeletonComponent from "../../../card/skeleton.component";
-import CardModal from "./cardModal/cardModal.component";
+import { fakeArray, userOnline } from "../../../../utils/index.utils";
 //////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 const RenderCards = (): ReactElement | ReactElement[] => {
@@ -18,8 +20,14 @@ const RenderCards = (): ReactElement | ReactElement[] => {
   const [items, setItems] = useState<any>(null);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState<number>(2);
-  const { data: firstData, isSuccess } = useGetDataQuery();
-
+  const {
+    data: firstData,
+    isSuccess,
+    isLoading,
+    isError: errorInFirstData,
+  } = useGetDataQuery();
+  const { data: newData, isError: errorInNewData } = useGetNewDataQuery(page);
+  const { data: dataLength } = useFetchTodoLengthQuery();
   useEffect(() => {
     if (isSuccess) {
       setItems(firstData);
@@ -28,18 +36,14 @@ const RenderCards = (): ReactElement | ReactElement[] => {
 
   //////////////////////////////////
   const fetchMoreData = async () => {
-    const newItem = await fetchNewData(page);
-    setItems([...items, ...newItem]);
-    if (newItem.length === 0 || newItem.length < 10) {
-      console.log("finished", newItem);
-
+    setItems([...items, ...newData]);
+    if (items.length + newData.length === dataLength) {
       setHasMore(false);
     }
     setPage(page + 1);
   };
   ///////////////////////////////////////////////
-
-  return items ? (
+  return isSuccess && items && isLoading == false ? (
     <InfiniteScroll
       dataLength={items.length}
       next={fetchMoreData}
@@ -54,7 +58,6 @@ const RenderCards = (): ReactElement | ReactElement[] => {
       {items.map((item: any) => {
         return (
           <>
-            <SkeletonComponent />
             <Cart
               setterDelete={setModalDelete}
               state={modalDelete}
@@ -66,9 +69,27 @@ const RenderCards = (): ReactElement | ReactElement[] => {
     </InfiniteScroll>
   ) : (
     <>
-      {" "}
-      <div className={Styles["inner-circle"]}></div>
-      <div className={Styles["outer-Circle"]}></div>
+      {errorInFirstData == false ? (
+        fakeArray.map((items) => {
+          return <SkeletonComponent key={items} />;
+        })
+      ) : (
+        <>
+          {userOnline ? (
+            <img
+              className={Styles.errorImage}
+              src={ErrorImage}
+              alt="ErrorImage"
+            />
+          ) : (
+            <img
+              className={Styles.errorImage}
+              src={NoConnection}
+              alt="ErrorImage"
+            />
+          )}
+        </>
+      )}
     </>
   );
 };
