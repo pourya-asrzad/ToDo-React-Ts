@@ -2,8 +2,8 @@ import CardModal from "./cardModal/cardModal.component";
 import React from "react";
 
 import RenderCards from "./renderingCard";
-const ListContainer = () => {
 
+const ListContainer = () => {
   const content = RenderCards();
 
   return (

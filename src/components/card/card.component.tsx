@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import CardModal from "../Home/TodosContainer.component/MUI_Container/cardModal/cardModal.component";
 import React from "react";
 type cardOptions = {
   state: boolean;
@@ -11,6 +12,8 @@ type cardOptions = {
 };
 const Cart = ({ state, setterDelete }: cardOptions) => {
   const [toggelBox, setToggeleBox] = useState(false);
+  const [open, setOpen] = React.useState<boolean>(false);
+
   const moreButton = () => {
     setToggeleBox(true);
   };
@@ -82,9 +85,13 @@ const Cart = ({ state, setterDelete }: cardOptions) => {
             </div>
             <div className={styles["card-buttons"]}>
               <button className={styles["card-button"]}>Edit</button>
-              <button onClick={toggleModal} className={styles["card-button"]}>
+              <button
+                onClick={() => setOpen(true)}
+                className={styles["card-button"]}
+              >
                 Delete
               </button>
+              <CardModal open={open} setOpen={setOpen} />
             </div>
           </div>
         </CardContent>

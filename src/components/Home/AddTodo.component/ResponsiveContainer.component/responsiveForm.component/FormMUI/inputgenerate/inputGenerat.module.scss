@@ -19,3 +19,11 @@
 .input-generat[type="date"] {
   text-align: center;
 }
+.input-generator:hover {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  label {
+    font-size: larger;
+  }
+}
