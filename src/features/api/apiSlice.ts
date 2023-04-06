@@ -93,7 +93,9 @@ export const {
   useDeleteTodoMutation,
 } = apiSlice;
 
-export const fetchNewData = async (LIMIT_LINK: any, page: string | number) => {
+export const fetchNewData = async (page: string | number) => {
+  LIMIT_LINK.searchParams.delete("limit");
+  LIMIT_LINK.searchParams.delete("page");
   LIMIT_LINK.searchParams.append("limit", 10);
   LIMIT_LINK.searchParams.append("page", `${page}`);
   const res = await fetch(LIMIT_LINK);
