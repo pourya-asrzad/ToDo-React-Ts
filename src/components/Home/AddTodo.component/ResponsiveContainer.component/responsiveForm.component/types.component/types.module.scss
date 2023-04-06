@@ -13,9 +13,13 @@
   position: absolute;
   left: 0;
   top: 0;
-  height: 100dvh;
+  height: 100%;
   width: 100dvw;
+
+  margin-top: 1rem;
+  border-top: 12px solid rgb(89, 113, 119);
   z-index: 10;
+  transition: all ease-in-out 500ms;
 }
 .modal-off {
   height: 4rem;

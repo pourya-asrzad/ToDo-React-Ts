@@ -1,6 +1,7 @@
 import Styles from "./pallet.module.scss";
-import usestate from "react";
+import { useState, useEffect } from "react";
 import React from "react";
+import { Window } from "@mui/icons-material";
 type ColorPad = {
   pallet?: [];
   modalSetter: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,19 +22,16 @@ const palletStyle = {
 };
 const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
   let palletTab = pallet ? pallet : MAIN_RGB;
-  console.log(palletTab);
 
   ///////////////////////toggle modal
 
   //////////////////////////////////////
   let content = palletTab.map((color, i) => {
-    console.log(color);
-
     return (
       <button
         style={{
-          width: "3.5rem",
-          height: "2rem",
+          width: state ? "4.5rem" : "3rem",
+          height: state ? "3.2rem" : "2rem",
           color: "#474747",
           cursor: "pointer",
           borderRadius: "4px",
@@ -48,6 +46,7 @@ const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
   });
 
   if (state) {
+    document.body.style.overflow = "hidden";
     return (
       <div className={Styles["pallet-modal-layout"]}>
         <div className={Styles["modal-action"]}>
@@ -61,7 +60,11 @@ const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
         </div>
         <div>
           <div
-            style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)" }}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3,1fr)",
+              marginLeft: "1rem",
+            }}
           >
             {" "}
             {content}
