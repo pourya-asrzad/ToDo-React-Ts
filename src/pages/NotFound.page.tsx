@@ -1,3 +1,4 @@
+import Page404 from "../assets/images/404.png";
 const NotFoundPage = () => {
   return (
     <div
@@ -8,7 +9,7 @@ const NotFoundPage = () => {
         marginTop: "10rem",
       }}
     >
-      <img loading="lazy" src="./images/404.png" />
+      <img loading="lazy" src={Page404} />
       <div className="help-Email" style={{ display: "flex" }}>
         <label
           style={{

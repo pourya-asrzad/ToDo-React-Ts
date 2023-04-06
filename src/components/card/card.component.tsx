@@ -22,7 +22,6 @@ const Cart = ({ state, setterDelete }: cardOptions) => {
   };
   const toggleModal = () => {
     setterDelete(!state);
-    console.log("change");
   };
   const bull = (
     <Box
