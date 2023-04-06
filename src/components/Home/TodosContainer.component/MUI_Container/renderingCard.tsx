@@ -1,59 +1,44 @@
-import { useGetTodosQuery } from "../../../../features/api/apiSlice";
+import {
+  useGetTodosQuery,
+  useGetDataQuery,
+  useGetNewDataQuery,
+  fetchNewData,
+} from "../../../../features/api/apiSlice";
 import Cart from "../../../card/card.component";
 import React, { ReactElement, useEffect, useState } from "react";
 import Styles from "./spinner/sppiner.module.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { CircularProgress } from "@mui/material";
 import SkeletonComponent from "../../../card/skeleton.component";
-
+import CardModal from "./cardModal/cardModal.component";
+//////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 const RenderCards = (): ReactElement | ReactElement[] => {
   const [modalDelete, setModalDelete] = useState<boolean>(false);
-  // const { data: Todos, isSuccess } = useGetTodosQuery();
   const [items, setItems] = useState<any>(null);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState<number>(2);
-
-  const LIMIT_LINK: any = new URL(
-    "https://6347eca8db76843976b5e973.mockapi.io/todos"
-  );
-
-  // useEffect(() => {
-  //   console.log("object");
-  // }, []);
-  let initialized = false;
+  const { data: firstData, isSuccess } = useGetDataQuery();
 
   useEffect(() => {
-    if (!initialized) {
-      const getData = async () => {
-        LIMIT_LINK.searchParams.append("limit", 5);
-        LIMIT_LINK.searchParams.append("page", 1);
-        const res = await fetch(LIMIT_LINK);
-        const data = await res.json();
-        console.log(data.length > 0 ? "i have data" : " i don't have data");
-        console.log(data);
-        setItems(data);
-      };
-      getData();
-      initialized = true;
+    if (isSuccess) {
+      setItems(firstData);
     }
-  }, []);
+  }, [isSuccess]);
 
-  const fetchNewData = async () => {
-    LIMIT_LINK.searchParams.append("limit", 10);
-    LIMIT_LINK.searchParams.append("page", `${page}`);
-    const res = await fetch(LIMIT_LINK);
-    const data = await res.json();
-    return data;
-  };
+  //////////////////////////////////
   const fetchMoreData = async () => {
-    const newData = await fetchNewData();
-    console.log([...items, ...newData]);
-    setItems([...items, ...newData]);
-    if (newData.length === 0 || newData.length < 10) {
+    const newItem = await fetchNewData(page);
+    setItems([...items, ...newItem]);
+    if (newItem.length === 0 || newItem.length < 10) {
+      console.log("finished", newItem);
+
       setHasMore(false);
     }
     setPage(page + 1);
   };
+  ///////////////////////////////////////////////
+
   return items ? (
     <InfiniteScroll
       dataLength={items.length}
