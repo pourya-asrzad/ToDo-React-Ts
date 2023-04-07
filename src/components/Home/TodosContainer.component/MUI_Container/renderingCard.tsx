@@ -1,25 +1,40 @@
-import { useGetTodosQuery } from "../../../../features/api/apiSlice";
+import ErrorImage from "../../../../assets/images/404.jpg";
+import Styles from "./todocontainer.module.scss";
+import NoConnection from "../../../../assets/images/noconnection.avif";
+import {
+  useGetTodosQuery,
+  useGetDataQuery,
+  useGetNewDataQuery,
+  useFetchTodoLengthQuery,
+} from "../../../../features/api/apiSlice";
 import Cart from "../../../card/card.component";
 import React, { ReactElement, useEffect, useState } from "react";
 import Styles from "./spinner/sppiner.module.scss";
-import InfiniteScroll from 'react-infinite-scroll-component';
-import {CircularProgress } from '@mui/material'
-import SkeletonComponent  from "../../../card/skeleton.component"
+import InfiniteScroll from "react-infinite-scroll-component";
+import { CircularProgress } from "@mui/material";
+import SkeletonComponent from "../../../card/skeleton.component";
 
 const RenderCards = (): ReactElement | ReactElement[] => {
-  const [modalDelete, setModalDelete] = React.useState<boolean>(false);
-  const { data: Todos, isSuccess } = useGetTodosQuery();
-  const [items,setItems] = React.useState<any> ([])
-  const [hasMore,setHasMore] = React.useState<boolean>(true)
-  const [page,setPage] = React.useState<number>(2)
-  
-  const LIMIT_LINK:any = new URL("https://6347eca8db76843976b5e973.mockapi.io/todos");
+  const [modalDelete, setModalDelete] = useState<boolean>(false);
+  // const { data: Todos, isSuccess } = useGetTodosQuery();
+  const [items, setItems] = useState<any>(null);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [page, setPage] = useState<number>(2);
 
+  const LIMIT_LINK: any = new URL(
+    "https://6347eca8db76843976b5e973.mockapi.io/todos"
+  );
 
-  useEffect(()=>{
-    const getData = async ()=>{
-        LIMIT_LINK.searchParams.append('limit', 10);
-        LIMIT_LINK.searchParams.append('page', 1)
+  // useEffect(() => {
+  //   console.log("object");
+  // }, []);
+  let initialized = false;
+
+  useEffect(() => {
+    if (!initialized) {
+      const getData = async () => {
+        LIMIT_LINK.searchParams.append("limit", 5);
+        LIMIT_LINK.searchParams.append("page", 1);
         const res = await fetch(LIMIT_LINK);
         const data = await res.json();
         console.log(data.length > 0 ? "i have data" : " i don't have data");
@@ -27,7 +42,8 @@ const RenderCards = (): ReactElement | ReactElement[] => {
         setItems(data);
       };
       getData();
-    
+      initialized = true;
+    }
   }, []);
 
   const fetchNewData = async () => {
@@ -37,17 +53,17 @@ const RenderCards = (): ReactElement | ReactElement[] => {
     const data = await res.json();
     return data;
   };
-  const fetchMoreData = async ()=>{
-    console.log('hello');
-    const newData = await fetchNewData()
-
-    setItems([...items,...newData])
-    if(newData.length === 0 || newData.length < 10){
-      setHasMore(false)
+  const fetchMoreData = async () => {
+    const newData = await fetchNewData();
+    console.log([...items, ...newData]);
+    setItems([...items, ...newData]);
+    if (newData.length === 0 || newData.length < 10) {
+      setHasMore(false);
     }
     setPage(page + 1);
   };
-  return items ? (
+  ///////////////////////////////////////////////
+  return isSuccess && items && isLoading == false ? (
     <InfiniteScroll
       dataLength={items.length}
       next={fetchMoreData}
@@ -62,7 +78,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
       {items.map((item: any) => {
         return (
           <>
-            <SkeletonComponent  />
+            <SkeletonComponent />
             <Cart
               setterDelete={setModalDelete}
               state={modalDelete}
@@ -74,9 +90,27 @@ const RenderCards = (): ReactElement | ReactElement[] => {
     </InfiniteScroll>
   ) : (
     <>
-      {" "}
-      <div className={Styles["inner-circle"]}></div>
-      <div className={Styles["outer-Circle"]}></div>
+      {errorInFirstData == false ? (
+        fakeArray.map((items) => {
+          return <SkeletonComponent key={items} />;
+        })
+      ) : (
+        <>
+          {userOnline ? (
+            <img
+              className={Styles.errorImage}
+              src={ErrorImage}
+              alt="ErrorImage"
+            />
+          ) : (
+            <img
+              className={Styles.errorImage}
+              src={NoConnection}
+              alt="ErrorImage"
+            />
+          )}
+        </>
+      )}
     </>
   );
 };

@@ -2,11 +2,17 @@
   background-color: skyblue;
   font-size: larger;
   border: none;
-  margin-top: 0.5rem;
+  margin-top: 2rem;
   border-radius: 5px;
   width: 70%;
-  height: 2.2rem;
+  height: 2.4rem;
   align-self: center;
   justify-self: center;
   cursor: pointer;
+}
+.add-todo:hover {
+  background-color: darkblue;
+  color: white;
+  font-size: x-large;
+  transition: all ease 400ms;
 }
