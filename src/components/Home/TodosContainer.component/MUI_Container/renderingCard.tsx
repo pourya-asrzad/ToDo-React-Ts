@@ -1,5 +1,5 @@
 import ErrorImage from "../../../../assets/images/404.jpg";
-import Styles from "./todocontainer.module.scss";
+// import Styles from "./todocontainer.module.scss";
 import NoConnection from "../../../../assets/images/noconnection.avif";
 import {
   useGetTodosQuery,
@@ -16,7 +16,7 @@ import SkeletonComponent from "../../../card/skeleton.component";
 
 const RenderCards = (): ReactElement | ReactElement[] => {
   const [modalDelete, setModalDelete] = useState<boolean>(false);
-  // const { data: Todos, isSuccess } = useGetTodosQuery();
+  const { data: Todos, isSuccess, isLoading } = useGetTodosQuery();
   const [items, setItems] = useState<any>(null);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState<number>(2);
