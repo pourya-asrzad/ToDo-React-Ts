@@ -13,11 +13,21 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { CircularProgress } from "@mui/material";
 import SkeletonComponent from "../../../card/skeleton.component";
 import { fakeArray, userOnline } from "../../../../utils/index.utils";
+import { useSelector , useDispatch } from "react-redux";
+import { setItems } from "../../../../features/slices/itemSlice";
+import type { RootState } from "../../../../features/store/store";
+
 //////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 const RenderCards = (): ReactElement | ReactElement[] => {
+  const itemsArry = useSelector((state: RootState)=>state.itemSlice.items);
+  const dispatch = useDispatch();
+  console.log(itemsArry);
+  
+  
+  
   const [modalDelete, setModalDelete] = useState<boolean>(false);
-  const [items, setItems] = useState<any>(null);
+  // const [items, setItems] = useState<any>(null);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState<number>(2);
   const {
@@ -30,22 +40,25 @@ const RenderCards = (): ReactElement | ReactElement[] => {
   const { data: dataLength } = useFetchTodoLengthQuery();
   useEffect(() => {
     if (isSuccess) {
-      setItems(firstData);
+      dispatch(setItems(firstData))
     }
   }, [isSuccess]);
 
   //////////////////////////////////
   const fetchMoreData = async () => {
-    setItems([...items, ...newData]);
-    if (items.length + newData.length === dataLength) {
+    dispatch(setItems([... itemsArry, ...newData]))
+    if (itemsArry.length + newData.length === dataLength) {
+      console.log('ahaaa');
+      
       setHasMore(false);
+
     }
     setPage(page + 1);
   };
   ///////////////////////////////////////////////
-  return isSuccess && items && isLoading == false ? (
+  return isSuccess && itemsArry && isLoading == false ? (
     <InfiniteScroll
-      dataLength={items.length}
+      dataLength={itemsArry.length}
       next={fetchMoreData}
       hasMore={hasMore}
       loader={<CircularProgress />}
@@ -55,7 +68,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
         </p>
       }
     >
-      {items.map((item: any) => {
+      {itemsArry.map((item: any) => {
         return (
           <>
             <Cart
