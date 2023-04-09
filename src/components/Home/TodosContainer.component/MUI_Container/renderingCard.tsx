@@ -75,6 +75,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
               setterDelete={setModalDelete}
               state={modalDelete}
               key={item.id}
+              info = {item}
             />
           </>
         );
