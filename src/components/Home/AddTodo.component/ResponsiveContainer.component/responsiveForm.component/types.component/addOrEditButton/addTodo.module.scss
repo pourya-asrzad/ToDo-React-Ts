@@ -1,5 +1,5 @@
 .add-todo {
-  background-color: skyblue;
+  background-color: #87ceeb;
   font-size: larger;
   border: none;
   margin-top: 2rem;
@@ -11,8 +11,8 @@
   cursor: pointer;
 }
 .add-todo:hover {
-  background-color: darkblue;
-  color: white;
-  font-size: x-large;
+  background-color: #73c4e4d4;
+  // color: white;
+  font-size: 20px;
   transition: all ease 400ms;
 }
