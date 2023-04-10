@@ -7,7 +7,9 @@ const Header = () => {
     <header>
       <div className="header-childe">
         <div className="header-container">
-          <Clock />
+          <div className="time">
+            <Clock />
+          </div>
           <div className="flex">
             <input
               type="text"
