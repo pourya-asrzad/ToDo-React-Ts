@@ -31,7 +31,7 @@ const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
   const addTypeHandeling = (e: any) => {
     modalSetter(!state);
     dispatch(setTodoType(e.target.innerText));
-    toast.success("🦄 Wow so easy!", {
+    toast.success("type aaded!", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,

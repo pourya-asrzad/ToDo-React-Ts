@@ -21,7 +21,6 @@ import type { RootState } from "../../../../features/store/store";
 const RenderCards = (): ReactElement | ReactElement[] => {
   const itemsArry = useSelector((state: RootState) => state.itemSlice.items);
   const dispatch = useDispatch();
-  console.log(itemsArry);
 
   const [modalDelete, setModalDelete] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -44,8 +43,6 @@ const RenderCards = (): ReactElement | ReactElement[] => {
   const fetchMoreData = async () => {
     dispatch(setItems([...itemsArry, ...newData]));
     if (itemsArry.length + newData.length === dataLength) {
-      console.log("ahaaa");
-
       setHasMore(false);
     }
     setPage(page + 1);

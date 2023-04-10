@@ -39,6 +39,7 @@ const Inputgenerator = ({
           value={value}
           className={Styles["input-generat"]}
           type={inputType ? inputType : "text"}
+          style={isvalid ? { border: "1px solid red" } : { border: "none" }}
         />
         <span className={Styles["input-error-msg"]}>{errorMsg}</span>
       </div>
