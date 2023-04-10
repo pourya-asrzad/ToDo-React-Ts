@@ -10,8 +10,10 @@ type InputType = {
   onBlur?: FocusEventHandler;
   value?: any;
   isvalid?: boolean;
+  errorMsg?: any;
 };
 const Inputgenerator = ({
+  errorMsg,
   title,
   inputType,
   placeholder,
@@ -38,6 +40,7 @@ const Inputgenerator = ({
           className={Styles["input-generat"]}
           type={inputType ? inputType : "text"}
         />
+        <span className={Styles["input-error-msg"]}>{errorMsg}</span>
       </div>
     </>
   );
