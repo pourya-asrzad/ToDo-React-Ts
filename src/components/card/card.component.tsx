@@ -9,8 +9,9 @@ import React from "react";
 type cardOptions = {
   state: boolean;
   setterDelete: React.Dispatch<React.SetStateAction<boolean>>;
+  info:any
 };
-const Cart = ({ state, setterDelete }: cardOptions) => {
+const Cart = ({ state, setterDelete,info }: cardOptions) => {
   const [toggelBox, setToggeleBox] = useState(false);
   const [open, setOpen] = React.useState<boolean>(false);
 
@@ -47,7 +48,7 @@ const Cart = ({ state, setterDelete }: cardOptions) => {
       >
         <CardContent>
           <Typography className={styles["card-title"]} component="div">
-            Card Titel {bull}
+           {info.title} {bull}
           </Typography>
           <div className={styles["card-detail"]}>
             <div className={styles["card-paragragh"]}>
@@ -57,11 +58,7 @@ const Cart = ({ state, setterDelete }: cardOptions) => {
                   !toggelBox ? styles["card-text"] : styles["card-text-toggle"]
                 }
               >
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad,
-                voluptates. Tempore sit officia repudiandae illum libero! Ut
-                eos, sed dicta architecto ex iusto placeat provident facilis
-                similique molestiae
-                consectetupkokpmomjhhbnmquisquamaljkdfhlkasdjfsldkjfafjkdhfskjfd?
+               {info.description}
               </p>
               <div className={styles["text-button"]}>
                 <span
