@@ -1,7 +1,9 @@
 import Styles from "./pallet.module.scss";
-import { useState, useEffect } from "react";
 import React from "react";
-import { Window } from "@mui/icons-material";
+import { toast, ToastContainer } from "react-toastify";
+import { setTodoType } from "../../../../../../../features/slices/itemSlice";
+import { useDispatch } from "react-redux";
+
 type ColorPad = {
   pallet?: [];
   modalSetter: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,18 +24,33 @@ const palletStyle = {
 };
 const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
   let palletTab = pallet ? pallet : MAIN_RGB;
-
+  const dispatch = useDispatch();
   ///////////////////////toggle modal
 
   //////////////////////////////////////
+  const addTypeHandeling = (e: any) => {
+    modalSetter(!state);
+    dispatch(setTodoType(e.target.innerText));
+    toast.success("type aaded!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
   let content = palletTab.map((color, i) => {
     return (
       <button
+        onClick={addTypeHandeling}
         style={{
           width: state ? "4.7rem" : "3.5rem",
           height: state ? "3.2rem" : "2.4rem",
           fontSize: state ? "large" : "small",
-          color: "#474747",
+          color: "#47474f",
           cursor: "pointer",
           borderRadius: "4px",
           background: `${color.color}`,
@@ -86,6 +103,18 @@ const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
           more
         </span>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 };

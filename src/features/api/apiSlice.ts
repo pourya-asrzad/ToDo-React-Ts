@@ -34,7 +34,6 @@ export const apiSlice = createApi({
       query: (page:number) =>{
         return API_LINK + `?limit=10&page=${page}`
       },
-   
       providesTags: ["Todos"],
     
     }),
@@ -46,7 +45,7 @@ export const apiSlice = createApi({
     }),
     addTodo: builder.mutation({
       query: (todo: any) => ({
-        url: "/todos",
+        url:API_LINK,
         method: "POST",
         body: todo,
       }),
