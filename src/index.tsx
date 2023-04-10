@@ -4,8 +4,8 @@ import App from "./App";
 import "./assets/styles/public.scss";
 import "./assets/styles/tweaks.scss";
 import { Provider } from "react-redux";
-import { apiSlice } from "./features/api/apiSlice";
 import { store } from "./features/store/store";
+import "react-toastify/dist/ReactToastify.css";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
