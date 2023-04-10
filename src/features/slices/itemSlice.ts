@@ -18,10 +18,14 @@ const itemSlice  = createSlice({
         },
         setTodoType(state:any,action:any){
             state.todoType = action.payload
+        },
+        addTodoToItems(state:any,action:any){
+         state.items = [action.payload,...state.items]
         }
     }
 
 })
 export const {setItems} = itemSlice.actions
 export const {setTodoType} = itemSlice.actions
+export const {addTodoToItems} = itemSlice.actions
 export default itemSlice.reducer

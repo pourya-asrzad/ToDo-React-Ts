@@ -3,11 +3,12 @@ import { useFormik } from "formik";
 import { ReactElement } from "react";
 import Inputgenerator from "./inputgenerate/input.generator";
 import Styles from "./form.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../../features/store/store";
 import { useAddTodoMutation } from "../../../../../../features/api/apiSlice";
 
 import { toast, ToastContainer } from "react-toastify";
+import { addTodoToItems } from "../../../../../../features/slices/itemSlice";
 type initialInputes = {
   children?: ReactElement | ReactElement[];
 };
@@ -15,7 +16,7 @@ type initialInputes = {
 const Form = ({ children }: initialInputes) => {
   const todoType = useSelector((state: RootState) => state.itemSlice.todoType);
   const [addTodo, { isLoading, isSuccess }] = useAddTodoMutation();
-
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -44,6 +45,9 @@ const Form = ({ children }: initialInputes) => {
           progress: undefined,
           theme: "colored",
         });
+        dispatch(
+          addTodoToItems({ dueDate: date, title, description, type: todoType })
+        );
       } catch (error) {
         alert(error);
       }
