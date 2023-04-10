@@ -1,6 +1,9 @@
 import Styles from "./pallet.module.scss";
 import React from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { setTodoType } from "../../../../../../../features/slices/itemSlice";
+import { useDispatch } from "react-redux";
+
 type ColorPad = {
   pallet?: [];
   modalSetter: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,13 +24,13 @@ const palletStyle = {
 };
 const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
   let palletTab = pallet ? pallet : MAIN_RGB;
-
+  const dispatch = useDispatch();
   ///////////////////////toggle modal
 
   //////////////////////////////////////
   const addTypeHandeling = (e: any) => {
-    console.log(e.target.innerText);
     modalSetter(!state);
+    dispatch(setTodoType(e.target.innerText));
     toast.success("🦄 Wow so easy!", {
       position: "top-right",
       autoClose: 5000,

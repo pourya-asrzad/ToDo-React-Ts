@@ -3,11 +3,15 @@ import { useFormik } from "formik";
 import { Children, ReactElement, ReactNode } from "react";
 import Inputgenerator from "./inputgenerate/input.generator";
 import Styles from "./form.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../../features/store/store";
 type initialInputes = {
   children?: ReactElement | ReactElement[];
 };
 
 const Form = ({ children }: initialInputes) => {
+  const todoType = useSelector((state: RootState) => state.itemSlice.todoType);
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -22,7 +26,7 @@ const Form = ({ children }: initialInputes) => {
       const title = value.title;
       const date = value.date;
       const descrption = value.description;
-      console.log(title, date, descrption);
+      console.log(title, date, descrption, todoType);
       try {
       } catch (error) {}
     },

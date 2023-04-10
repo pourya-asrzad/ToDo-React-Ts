@@ -2,7 +2,6 @@ import ErrorImage from "../../../../assets/images/404.jpg";
 import Styles from "./todocontainer.module.scss";
 import NoConnection from "../../../../assets/images/noconnection.avif";
 import {
-  useGetTodosQuery,
   useGetDataQuery,
   useGetNewDataQuery,
   useFetchTodoLengthQuery,
@@ -13,21 +12,18 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { CircularProgress } from "@mui/material";
 import SkeletonComponent from "../../../card/skeleton.component";
 import { fakeArray, userOnline } from "../../../../utils/index.utils";
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setItems } from "../../../../features/slices/itemSlice";
 import type { RootState } from "../../../../features/store/store";
 
 //////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 const RenderCards = (): ReactElement | ReactElement[] => {
-  const itemsArry = useSelector((state: RootState)=>state.itemSlice.items);
+  const itemsArry = useSelector((state: RootState) => state.itemSlice.items);
   const dispatch = useDispatch();
   console.log(itemsArry);
-  
-  
-  
+
   const [modalDelete, setModalDelete] = useState<boolean>(false);
-  // const [items, setItems] = useState<any>(null);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState<number>(2);
   const {
@@ -40,18 +36,17 @@ const RenderCards = (): ReactElement | ReactElement[] => {
   const { data: dataLength } = useFetchTodoLengthQuery();
   useEffect(() => {
     if (isSuccess) {
-      dispatch(setItems(firstData))
+      dispatch(setItems(firstData));
     }
   }, [isSuccess]);
 
   //////////////////////////////////
   const fetchMoreData = async () => {
-    dispatch(setItems([... itemsArry, ...newData]))
+    dispatch(setItems([...itemsArry, ...newData]));
     if (itemsArry.length + newData.length === dataLength) {
-      console.log('ahaaa');
-      
-      setHasMore(false);
+      console.log("ahaaa");
 
+      setHasMore(false);
     }
     setPage(page + 1);
   };
@@ -75,7 +70,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
               setterDelete={setModalDelete}
               state={modalDelete}
               key={item.id}
-              info = {item}
+              info={item}
             />
           </>
         );
