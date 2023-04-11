@@ -16,7 +16,6 @@ function LinkParams(
   return LIMIT_LINK.href;
 }
 
-
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
@@ -31,21 +30,20 @@ export const apiSlice = createApi({
       providesTags: ["Todos"],
     }),
     getNewData: builder.query({
-      query: (page:number) =>{
-        return API_LINK + `?limit=10&page=${page}`
+      query: (page: number) => {
+        return API_LINK + `?limit=10&page=${page}`;
       },
       providesTags: ["Todos"],
-    
     }),
     fetchTodoLength: builder.query({
       query: () => API_LINK,
-      transformResponse: (res:any) => {
+      transformResponse: (res: any) => {
         return res.length;
       },
     }),
     addTodo: builder.mutation({
       query: (todo: any) => ({
-        url:API_LINK,
+        url: API_LINK,
         method: "POST",
         body: todo,
       }),
@@ -53,6 +51,13 @@ export const apiSlice = createApi({
     }),
     getData: builder.query({
       query: () => LinkParams(LIMIT_LINK),
+      transformResponse: (res: any) => {
+        return res;
+      },
+      providesTags: ["Todos"],
+    }),
+    getSingleData: builder.query({
+      query: (id: string | number) => `/${id}`,
       transformResponse: (res: any) => {
         return res;
       },
@@ -82,9 +87,9 @@ export const {
   useGetTodosQuery,
   useGetDataQuery,
   useGetNewDataQuery,
+  useGetSingleDataQuery,
   useFetchTodoLengthQuery,
   useAddTodoMutation,
   useUpdateTodoMutation,
   useDeleteTodoMutation,
 } = apiSlice;
-

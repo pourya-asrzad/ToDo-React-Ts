@@ -13,6 +13,7 @@ export const AppRouting = () => {
           <Route path={INTERNAL_PATH.HOME} element={<LazyHome />} />
           <Route path={INTERNAL_PATH.SEARCH} element={<LazySearch />} />
           <Route path={INTERNAL_PATH.NOT_FOUND} element={<NotFoundPage />} />
+          <Route path={INTERNAL_PATH.Edit} element={<LazyHome />} />
         </Route>
       </Routes>
     </BrowserRouter>

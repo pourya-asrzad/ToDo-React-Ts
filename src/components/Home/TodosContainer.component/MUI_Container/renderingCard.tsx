@@ -68,6 +68,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
               state={modalDelete}
               key={item.id}
               info={item}
+              id={item.id}
             />
           </>
         );

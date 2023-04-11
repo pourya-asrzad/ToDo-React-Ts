@@ -11,17 +11,22 @@ import { toast, ToastContainer } from "react-toastify";
 import { addTodoToItems } from "../../../../../../features/slices/itemSlice";
 type initialInputes = {
   children?: ReactElement | ReactElement[];
+
+  title?: string;
+  id?: string | number;
+  description?: string;
+  date?: Date | string;
 };
 
-const Form = ({ children }: initialInputes) => {
+const Form = ({ children, title, id, description, date }: initialInputes) => {
   const todoType = useSelector((state: RootState) => state.itemSlice.todoType);
   const [addTodo, { isLoading, isSuccess }] = useAddTodoMutation();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      title: "",
-      description: "",
-      date: "",
+      title: title ? title : "",
+      description: description ? description : "",
+      date: date ? date : "",
     },
     validationSchema: Yup.object({
       title: Yup.string().required(" you should write the title !"),

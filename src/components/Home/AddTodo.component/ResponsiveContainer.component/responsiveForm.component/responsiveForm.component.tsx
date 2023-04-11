@@ -8,7 +8,7 @@ const ResponsiveForm = () => {
       <div className={Styles["form-container"]}>
         <Form />
         <ColorTypes />
-        <AddTodo Action={false} />
+        <AddTodo  />
       </div>
     </>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./card.module.scss";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -6,14 +7,29 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CardModal from "../Home/TodosContainer.component/MUI_Container/cardModal/cardModal.component";
 import React from "react";
+
+import { useNavigate } from "react-router-dom";
+
+import { hndleAction } from "../../features/slices/itemSlice";
+import EditPage from "../editPage/edit.cardRender";
 type cardOptions = {
   state: boolean;
   setterDelete: React.Dispatch<React.SetStateAction<boolean>>;
-  info:any
+  info: any;
+  id: number | string;
 };
-const Cart = ({ state, setterDelete,info }: cardOptions) => {
+const Cart = ({ state, setterDelete, info, id }: cardOptions) => {
   const [toggelBox, setToggeleBox] = useState(false);
   const [open, setOpen] = React.useState<boolean>(false);
+  const [openEdit, setopenEdit] = React.useState<boolean>(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const hndleEdit = () => {
+    dispatch(hndleAction("Edit"));
+    navigate(`/editItem/${id}`);
+    setopenEdit(true);
+  };
 
   const moreButton = () => {
     setToggeleBox(true);
@@ -21,9 +37,7 @@ const Cart = ({ state, setterDelete,info }: cardOptions) => {
   const lessButton = () => {
     setToggeleBox(false);
   };
-  const toggleModal = () => {
-    setterDelete(!state);
-  };
+
   const bull = (
     <Box
       component="span"
@@ -48,7 +62,7 @@ const Cart = ({ state, setterDelete,info }: cardOptions) => {
       >
         <CardContent>
           <Typography className={styles["card-title"]} component="div">
-           {info.title} {bull}
+            {info.title} {bull}
           </Typography>
           <div className={styles["card-detail"]}>
             <div className={styles["card-paragragh"]}>
@@ -58,7 +72,7 @@ const Cart = ({ state, setterDelete,info }: cardOptions) => {
                   !toggelBox ? styles["card-text"] : styles["card-text-toggle"]
                 }
               >
-               {info.description}
+                {info.description}
               </p>
               <div className={styles["text-button"]}>
                 <span
@@ -80,7 +94,12 @@ const Cart = ({ state, setterDelete,info }: cardOptions) => {
               </div>
             </div>
             <div className={styles["card-buttons"]}>
-              <button className={styles["card-button"]}>Edit</button>
+              <button
+                onClick={() => hndleEdit()}
+                className={styles["card-button"]}
+              >
+                Edit
+              </button>
               <button
                 onClick={() => setOpen(true)}
                 className={styles["card-button"]}
@@ -92,6 +111,7 @@ const Cart = ({ state, setterDelete,info }: cardOptions) => {
           </div>
         </CardContent>
       </Card>
+      <EditPage setOpen={setopenEdit} open={openEdit} />
     </>
   );
 };
