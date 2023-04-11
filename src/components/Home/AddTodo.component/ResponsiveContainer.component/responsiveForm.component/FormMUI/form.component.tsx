@@ -25,10 +25,10 @@ const Form = ({ children }: initialInputes) => {
     },
     validationSchema: Yup.object({
       title: Yup.string().required(" you should write the title !"),
-      description: Yup.string().required("you shoul write the description"),
+      description: Yup.string().required("you should write the description"),
       date: Yup.string().required("you shoul choose the date"),
     }),
-    onSubmit: async (value) => {
+    onSubmit: async (value: any) => {
       try {
         const title = value.title;
         const date = value.date;
