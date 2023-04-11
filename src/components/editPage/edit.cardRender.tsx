@@ -61,13 +61,26 @@ export default function EditPage({
                   title={SingleData.title}
                   id={SingleData.id}
                   description={SingleData.description}
-                  date={SingleData.date}
+                  dueDate={SingleData.dueDate}
                 />
               </div>
               <ColorTypes />
-              <div className="btn-edit-modal">
-                <button onClick={() => console.log("")}>Edit</button>
-                <button onClick={() => closeModal()}>Cancel</button>
+              <div
+                className={Styles["modal-actions-container"]}
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <button
+                  className={Styles["btn-edit-modal"]}
+                  onClick={() => console.log("")}
+                >
+                  Edit
+                </button>
+                <button
+                  className={Styles["btn-edit-modal"]}
+                  onClick={() => closeModal()}
+                >
+                  Cancel
+                </button>
               </div>
             </Typography>
           </Box>

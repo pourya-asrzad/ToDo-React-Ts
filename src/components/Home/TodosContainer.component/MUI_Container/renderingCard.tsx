@@ -13,7 +13,7 @@ import { CircularProgress } from "@mui/material";
 import SkeletonComponent from "../../../card/skeleton.component";
 import { fakeArray, userOnline } from "../../../../utils/index.utils";
 import { useSelector, useDispatch } from "react-redux";
-import { setItems } from "../../../../features/slices/itemSlice";
+import itemSlice, { setItems } from "../../../../features/slices/itemSlice";
 import type { RootState } from "../../../../features/store/store";
 
 //////////////////////////////////////////////////////////////////////
@@ -44,6 +44,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
     dispatch(setItems([...itemsArry, ...newData]));
     if (itemsArry.length + newData.length === dataLength) {
       setHasMore(false);
+      console.log(itemsArry);
     }
     setPage(page + 1);
   };

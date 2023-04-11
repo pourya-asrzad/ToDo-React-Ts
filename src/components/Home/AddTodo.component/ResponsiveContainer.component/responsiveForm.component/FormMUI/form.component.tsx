@@ -15,10 +15,10 @@ type initialInputes = {
   title?: string;
   id?: string | number;
   description?: string;
-  date?: Date | string;
+  dueDate?: Date | string;
 };
 
-const Form = ({ children, title, id, description, date }: initialInputes) => {
+const Form = ({ children, title, id, description, dueDate }: initialInputes) => {
   const todoType = useSelector((state: RootState) => state.itemSlice.todoType);
   const [addTodo, { isLoading, isSuccess }] = useAddTodoMutation();
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const Form = ({ children, title, id, description, date }: initialInputes) => {
     initialValues: {
       title: title ? title : "",
       description: description ? description : "",
-      date: date ? date : "",
+      date: dueDate ? dueDate : "",
     },
     validationSchema: Yup.object({
       title: Yup.string().required(" you should write the title !"),

@@ -29,6 +29,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
+  margin-top: 1rem;
 }
 .modal-actions-container > button {
   height: 2rem;
