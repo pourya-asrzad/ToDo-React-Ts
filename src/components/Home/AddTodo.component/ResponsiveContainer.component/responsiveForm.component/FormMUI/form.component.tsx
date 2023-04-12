@@ -5,7 +5,10 @@ import Inputgenerator from "./inputgenerate/input.generator";
 import Styles from "./form.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../../features/store/store";
-import { useAddTodoMutation } from "../../../../../../features/api/apiSlice";
+import {
+  useAddTodoMutation,
+  useUpdateTodoMutation,
+} from "../../../../../../features/api/apiSlice";
 
 import { toast, ToastContainer } from "react-toastify";
 import { addTodoToItems } from "../../../../../../features/slices/itemSlice";
@@ -18,9 +21,17 @@ type initialInputes = {
   dueDate?: Date | string;
 };
 
-const Form = ({ children, title, id, description, dueDate }: initialInputes) => {
+const Form = ({
+  children,
+  title,
+  id,
+  description,
+  dueDate,
+}: initialInputes) => {
   const todoType = useSelector((state: RootState) => state.itemSlice.todoType);
+  const actiontype = useSelector((state: RootState) => state.itemSlice.action);
   const [addTodo, { isLoading, isSuccess }] = useAddTodoMutation();
+  const [updateTodo] = useUpdateTodoMutation();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -39,7 +50,21 @@ const Form = ({ children, title, id, description, dueDate }: initialInputes) => 
         const date = value.date;
         const description = value.description;
         console.log(title, date, description, todoType);
-        addTodo({ dueDate: date, title, description, type: todoType });
+        if (actiontype === "Add") {
+          addTodo({ dueDate: date, title, description, type: todoType });
+          dispatch(
+            addTodoToItems({
+              dueDate: date,
+              title,
+              description,
+              type: todoType,
+            })
+          );
+        }
+        if (actiontype === "Edit") {
+          updateTodo({ id, title, description, date, todoType });
+        }
+
         toast.success("todo added !", {
           position: "top-right",
           autoClose: 5000,
@@ -50,9 +75,6 @@ const Form = ({ children, title, id, description, dueDate }: initialInputes) => 
           progress: undefined,
           theme: "colored",
         });
-        dispatch(
-          addTodoToItems({ dueDate: date, title, description, type: todoType })
-        );
       } catch (error) {
         alert(error);
       }
@@ -61,7 +83,7 @@ const Form = ({ children, title, id, description, dueDate }: initialInputes) => 
   return (
     <>
       <form
-        id="addTodo"
+        id={actiontype === "Add" ? "addTodo" : "EditTodo"}
         onSubmit={formik.handleSubmit}
         className={Styles["form-container"]}
       >
@@ -111,6 +133,11 @@ const Form = ({ children, title, id, description, dueDate }: initialInputes) => 
           onBlur={formik.handleBlur}
           value={formik.values.date}
           isvalid={formik.touched.date && formik.errors.date ? true : false}
+        />
+        <input
+          type="submit"
+          value={"Edit"}
+          style={{ visibility: actiontype === "Add" ? "hidden" : "visible" }}
         />
       </form>
       <ToastContainer

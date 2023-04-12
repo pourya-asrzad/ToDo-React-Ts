@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_LINK } from "../../api/apis";
+import { number } from "yup";
+import { string } from "yup";
 const LIMIT_LINK: any = new URL(
   "https://6347eca8db76843976b5e973.mockapi.io/todos"
 );
@@ -64,10 +66,10 @@ export const apiSlice = createApi({
       providesTags: ["Todos"],
     }),
 
-    updateTodo: builder.mutation({
+    UpdateTodo: builder.mutation({
       query: (todo: any) => ({
-        url: `/todos/${todo.id}`,
-        method: "PATCH",
+        url: API_LINK + `/${todo.id}`,
+        method: "PUT",
         body: todo,
       }),
       invalidatesTags: ["Todos"],

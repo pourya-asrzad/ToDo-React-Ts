@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Styles from "./editPage.module.scss";
+import { RootState } from "../../features/store/store";
+import { useSelector } from "react-redux";
 import ColorTypes from "../Home/AddTodo.component/ResponsiveContainer.component/responsiveForm.component/types.component/types.component";
 import { useGetSingleDataQuery } from "../../features/api/apiSlice";
 import { useParams } from "react-router-dom";
@@ -35,18 +37,15 @@ export default function EditPage({
 }: hndleOpen) {
   const { id } = useParams();
   const navigate = useNavigate();
-  const {
-    data: SingleData,
-    isSuccess,
-    isError,
-    isLoading,
-  } = useGetSingleDataQuery(id);
+  const selectedCard = useSelector((state: RootState) =>
+    state.itemSlice.items.filter((item: any) => item.id == id)
+  );
   function closeModal() {
     navigate("/");
     setOpen(false);
   }
   return (
-    isSuccess && (
+    selectedCard[0] && (
       <div>
         <Modal
           open={open}
@@ -58,10 +57,10 @@ export default function EditPage({
             <Typography id="modal-modal-title" variant="h6" component="h2">
               <div className={Styles["modal-Edit"]}>
                 <Form
-                  title={SingleData.title}
-                  id={SingleData.id}
-                  description={SingleData.description}
-                  dueDate={SingleData.dueDate}
+                  title={selectedCard[0].title}
+                  id={selectedCard[0].id}
+                  description={selectedCard[0].description}
+                  dueDate={selectedCard[0].dueDate}
                 />
               </div>
               <ColorTypes />
@@ -71,7 +70,8 @@ export default function EditPage({
               >
                 <button
                   className={Styles["btn-edit-modal"]}
-                  onClick={() => console.log("")}
+                  type="submit"
+                  form="EditTodo"
                 >
                   Edit
                 </button>
