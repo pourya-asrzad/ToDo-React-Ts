@@ -42,10 +42,10 @@ export default function EditPage({
     state.itemSlice.items.filter((item: any) => item.id == id)
   );
   const dispatch = useDispatch();
-  function closeModal() {
-    navigate("/");
-    setOpen(false);
-  }
+  // function closeModal() {
+  //   navigate("/");
+  //   setOpen(false);
+  // }
   const handleClose = (
     event: {},
     reason: "backdropClick" | "escapeKeyDown"

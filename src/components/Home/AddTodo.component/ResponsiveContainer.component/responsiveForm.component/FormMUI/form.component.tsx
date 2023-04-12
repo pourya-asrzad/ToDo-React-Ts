@@ -88,7 +88,10 @@ const Form = ({
         if (actiontype === "Edit") {
           updateTodo({ id, title, description, date, todoType });
           if (setOpen !== undefined) {
-            setTimeout(() => setOpen(!open), 1000);
+            setTimeout(() => {
+              setOpen(!open);
+              location.reload();
+            }, 1000);
           }
           dispatch(hndleAction("Add"));
         }
