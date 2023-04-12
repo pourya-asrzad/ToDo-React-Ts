@@ -12,6 +12,9 @@
   flex-direction: column;
   gap: 2rem;
 }
+.modal-section {
+  position: relative;
+}
 .modal-close {
   justify-self: end;
   padding: 0.25rem 0.25rem;
@@ -67,4 +70,24 @@
 }
 .btn-modal {
   font-size: large;
+}
+.btn {
+  justify-self: center;
+  position: absolute;
+  top: -33px;
+  left: 41%;
+  cursor: pointer;
+  border: none;
+  background-color: salmon;
+  font-size: larger;
+  height: 2.5rem;
+  width: 3rem;
+  border-radius: 10px;
+  z-index: 5;
+}
+.btn:hover {
+  font-weight: bold;
+  background-color: aliceblue;
+  color: black;
+  border: 1px solid black;
 }

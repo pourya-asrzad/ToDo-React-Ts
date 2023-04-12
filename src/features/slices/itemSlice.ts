@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface itemSlice {
   items: [];
-  todoType: string | null;
+  todoType: string | null | object;
   action: "Add" | "Edit";
 }
 

@@ -6,13 +6,14 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Styles from "./editPage.module.scss";
 import { RootState } from "../../features/store/store";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ColorTypes from "../Home/AddTodo.component/ResponsiveContainer.component/responsiveForm.component/types.component/types.component";
 import { useGetSingleDataQuery } from "../../features/api/apiSlice";
 import { useParams } from "react-router-dom";
 import Form from "../Home/AddTodo.component/ResponsiveContainer.component/responsiveForm.component/FormMUI/form.component";
 import { title } from "process";
 import { useNavigate } from "react-router-dom";
+import { hndleAction } from "../../features/slices/itemSlice";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -40,23 +41,44 @@ export default function EditPage({
   const selectedCard = useSelector((state: RootState) =>
     state.itemSlice.items.filter((item: any) => item.id == id)
   );
+  const dispatch = useDispatch();
   function closeModal() {
     navigate("/");
     setOpen(false);
   }
+  const handleClose = (
+    event: {},
+    reason: "backdropClick" | "escapeKeyDown"
+  ) => {
+    if (reason === "backdropClick") {
+      console.log(reason);
+    } else {
+      setOpen(false);
+    }
+  };
+  const hndleModalClose = () => {
+    dispatch(hndleAction("Add"));
+    setOpen(false);
+  };
   return (
     selectedCard[0] && (
-      <div>
+      <div className={Styles["modal-section"]}>
         <Modal
+          disableEscapeKeyDown={true}
           open={open}
-          onClose={() => setOpen(false)}
+          onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
           <Box sx={style} className={Styles["delete-modal-layout"]}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
+              <button className={Styles["btn"]} onClick={hndleModalClose}>
+                X
+              </button>
               <div className={Styles["modal-Edit"]}>
                 <Form
+                  setOpen={setOpen}
+                  open={open}
                   title={selectedCard[0].title}
                   id={selectedCard[0].id}
                   description={selectedCard[0].description}
@@ -64,24 +86,6 @@ export default function EditPage({
                 />
               </div>
               <ColorTypes />
-              <div
-                className={Styles["modal-actions-container"]}
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
-                <button
-                  className={Styles["btn-edit-modal"]}
-                  type="submit"
-                  form="EditTodo"
-                >
-                  Edit
-                </button>
-                <button
-                  className={Styles["btn-edit-modal"]}
-                  onClick={() => closeModal()}
-                >
-                  Cancel
-                </button>
-              </div>
             </Typography>
           </Box>
         </Modal>
