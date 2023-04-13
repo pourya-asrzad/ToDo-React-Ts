@@ -62,6 +62,8 @@ const RenderCards = (): ReactElement | ReactElement[] => {
       }
     >
       {itemsArry.map((item: any) => {
+        console.log("Date", item);
+
         return (
           <>
             <Cart

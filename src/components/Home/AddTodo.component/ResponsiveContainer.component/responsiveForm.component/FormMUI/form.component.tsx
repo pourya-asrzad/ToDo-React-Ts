@@ -84,21 +84,7 @@ const Form = ({
               type: todoType,
             })
           );
-        }
-        if (actiontype === "Edit") {
-          updateTodo({ id, title, description, date, todoType });
-          if (setOpen !== undefined) {
-            setTimeout(() => {
-              setOpen(!open);
-              location.reload();
-            }, 1000);
-          }
-          dispatch(hndleAction("Add"));
-        }
-
-        toast.success(
-          actiontype === "Add" ? "todo added !" : "Todo Edited successfully",
-          {
+          toast.success("todo added !", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -107,8 +93,28 @@ const Form = ({
             draggable: true,
             progress: undefined,
             theme: "colored",
+          });
+        }
+        if (actiontype === "Edit") {
+          updateTodo({ id, title, description, dueDate, todoType });
+          if (setOpen !== undefined) {
+            setTimeout(() => {
+              setOpen(!open);
+              location.reload();
+            }, 1000);
           }
-        );
+          dispatch(hndleAction("Add"));
+          toast.success("Todo Edited successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
       } catch (error) {
         alert(error);
       }
