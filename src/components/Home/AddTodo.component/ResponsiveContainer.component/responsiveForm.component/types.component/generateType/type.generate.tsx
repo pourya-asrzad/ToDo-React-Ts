@@ -79,31 +79,28 @@ const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
   }, [state]);
 
   if (state) {
-    document.body.style.overflow = "hidden";
     return (
-      <div className={Styles["pallet-modal-layout"]}>
-        <Modal
-          open={state}
-          onClose={() => modalSetter(false)}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style} className={Styles["delete-modal-layout"]}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span>Types</span>
-                <button
-                  className={Styles["btn-off"]}
-                  onClick={() => modalSetter(!state)}
-                >
-                  X
-                </button>
-              </div>
-              <div>{content}</div>
-            </Typography>
-          </Box>
-        </Modal>
-      </div>
+      <Modal
+        open={state}
+        onClose={() => modalSetter(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style} className={Styles["delete-modal-layout"]}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span>Types</span>
+              <button
+                className={Styles["btn-off"]}
+                onClick={() => modalSetter(!state)}
+              >
+                X
+              </button>
+            </div>
+            <div>{content}</div>
+          </Typography>
+        </Box>
+      </Modal>
     );
   }
   return (
