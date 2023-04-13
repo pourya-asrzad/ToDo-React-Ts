@@ -14,6 +14,7 @@ import {
   addTodoToItems,
   hndleAction,
 } from "../../../../../../features/slices/itemSlice";
+import { useNavigate } from "react-router-dom";
 ////////////////////////////////////////////set Type for our form include props / children
 type initialInputes = {
   children?: ReactElement | ReactElement[];
@@ -51,6 +52,7 @@ const Form = ({
   const [addTodo, { isLoading, isSuccess }] = useAddTodoMutation();
   const [updateTodo] = useUpdateTodoMutation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //////////////////////////////////////////////////////////////////////
   /// we use formik to hndle error and patterns easily and firsst we gave it the initial values
 
@@ -114,6 +116,7 @@ const Form = ({
             progress: undefined,
             theme: "colored",
           });
+          navigate("/");
         }
       } catch (error) {
         alert(error);
