@@ -14,6 +14,7 @@ import Form from "../Home/AddTodo.component/ResponsiveContainer.component/respon
 import { title } from "process";
 import { useNavigate } from "react-router-dom";
 import { hndleAction } from "../../features/slices/itemSlice";
+import { log } from "console";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -41,6 +42,7 @@ export default function EditPage({
   const selectedCard = useSelector((state: RootState) =>
     state.itemSlice.items.filter((item: any) => item.id == id)
   );
+
   const dispatch = useDispatch();
   // function closeModal() {
   //   navigate("/");
@@ -59,6 +61,7 @@ export default function EditPage({
   const hndleModalClose = () => {
     dispatch(hndleAction("Add"));
     setOpen(false);
+    navigate("/");
   };
   return (
     selectedCard[0] && (

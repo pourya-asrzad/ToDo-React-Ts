@@ -17,8 +17,9 @@ type cardOptions = {
   setterDelete: React.Dispatch<React.SetStateAction<boolean>>;
   info: any;
   id: number | string;
+  action?: string;
 };
-const Cart = ({ state, setterDelete, info, id }: cardOptions) => {
+const Cart = ({ state, setterDelete, info, id, action }: cardOptions) => {
   const [toggelBox, setToggeleBox] = useState(false);
   const [open, setOpen] = React.useState<boolean>(false);
   const [openEdit, setopenEdit] = React.useState<boolean>(false);

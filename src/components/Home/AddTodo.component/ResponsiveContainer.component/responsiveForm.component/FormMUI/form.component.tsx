@@ -15,6 +15,10 @@ import {
   hndleAction,
 } from "../../../../../../features/slices/itemSlice";
 import { useNavigate } from "react-router-dom";
+import {
+  hndleEdit,
+  setItems,
+} from "../../../../../../features/slices/itemSlice";
 ////////////////////////////////////////////set Type for our form include props / children
 type initialInputes = {
   children?: ReactElement | ReactElement[];
@@ -49,13 +53,32 @@ const Form = ({
 
   const todoType = useSelector((state: RootState) => state.itemSlice.todoType);
   const actiontype = useSelector((state: RootState) => state.itemSlice.action);
+  const onEdit = useSelector((state: RootState) => state.itemSlice.editOperate);
+  const items = useSelector((state: RootState) => state.itemSlice.items);
   const [addTodo, { isLoading, isSuccess }] = useAddTodoMutation();
   const [updateTodo] = useUpdateTodoMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   //////////////////////////////////////////////////////////////////////
   /// we use formik to hndle error and patterns easily and firsst we gave it the initial values
-
+  const arrayUpdate = (
+    items: any,
+    id: number | string | undefined,
+    title: string,
+    description: string,
+    dueDate: undefined | string | Date,
+    todoType: string
+  ) => {
+    let target = items.filter((item: any) => {
+      return item.id === id;
+    });
+    const restItems = items.filter((item: any) => {
+      return item.id !== id;
+    });
+    target = [{ id, title, description, dueDate, todoType }];
+    dispatch(setItems([...target, ...restItems]));
+  };
   const formik = useFormik({
     initialValues: {
       title: title ? title : "",
@@ -67,6 +90,7 @@ const Form = ({
       description: Yup.string().required("you should write the description"),
       date: Yup.string().required("you shoul choose the date"),
     }),
+
     ////////////////////////now we ucreate a submit func for hndling submit
     onSubmit: async (value: any) => {
       try {
@@ -98,13 +122,17 @@ const Form = ({
           });
         }
         if (actiontype === "Edit") {
+          arrayUpdate(items, id, title, description, dueDate, todoType);
           updateTodo({ id, title, description, dueDate, todoType });
+
           if (setOpen !== undefined) {
             setTimeout(() => {
               setOpen(!open);
-              location.reload();
+
+              navigate("/");
             }, 1000);
           }
+          dispatch(hndleEdit(!onEdit));
           dispatch(hndleAction("Add"));
           toast.success("Todo Edited successfully", {
             position: "top-right",

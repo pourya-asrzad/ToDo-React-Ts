@@ -4,12 +4,14 @@ export interface itemSlice {
   items: [];
   todoType: string | null | object;
   action: "Add" | "Edit";
+  editOperate:boolean
 }
 
 const initialState: itemSlice = {
   items: [],
   todoType: null,
   action: "Add",
+  editOperate:false
 };
 const itemSlice = createSlice({
   name: "itemSlice",
@@ -27,10 +29,14 @@ const itemSlice = createSlice({
     hndleAction(state: any, action: any) {
       state.action = action.payload;
     },
+    hndleEdit(state: any, action: any){
+        state.editOperate = action.payload
+    }
   },
 });
 export const { setItems } = itemSlice.actions;
 export const { setTodoType } = itemSlice.actions;
 export const { addTodoToItems } = itemSlice.actions;
 export const { hndleAction } = itemSlice.actions;
+export const { hndleEdit } = itemSlice.actions;
 export default itemSlice.reducer;
