@@ -1,9 +1,13 @@
 import Styles from "./pallet.module.scss";
-import React from "react";
+import React, { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { setTodoType } from "../../../../../../../features/slices/itemSlice";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import { RootState } from "../../../../../../../features/store/store";
 type ColorPad = {
   pallet?: [];
   modalSetter: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,20 +21,27 @@ const MAIN_RGB = [
   { color: "#FFEDCD", title: "meeting" },
   { color: "#ED00C2", title: "food" },
 ];
-const palletStyle = {
-  margin: " 1rem 0.5rem",
-  width: "20px",
-  height: "20px",
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
 };
 const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
   let palletTab = pallet ? pallet : MAIN_RGB;
   const dispatch = useDispatch();
   ///////////////////////toggle modal
-
+  const type = useSelector((state: RootState) => state.itemSlice.todoType);
   //////////////////////////////////////
   const addTypeHandeling = (e: any) => {
     modalSetter(!state);
     dispatch(setTodoType(e.target.innerText));
+
     toast.success("type aaded!", {
       position: "top-right",
       autoClose: 5000,
@@ -62,33 +73,33 @@ const TypeGenerator = ({ pallet, state, modalSetter }: ColorPad) => {
       </button>
     );
   });
-  document.body.style.overflow = state ? "hidden" : "visible";
+  useEffect(() => {
+    document.body.style.overflow = state ? "hidden" : "visible";
+  }, [state]);
+
   if (state) {
-    document.body.style.overflow = "hidden";
     return (
-      <div className={Styles["pallet-modal-layout"]}>
-        <div className={Styles["modal-action"]}>
-          <label className={Styles["types-title"]}>Types</label>
-          <button
-            className={Styles["btn-off"]}
-            onClick={() => modalSetter(!state)}
-          >
-            X
-          </button>
-        </div>
-        <div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3,1fr)",
-              marginLeft: "1rem",
-            }}
-          >
-            {" "}
-            {content}
-          </div>
-        </div>
-      </div>
+      <Modal
+        open={state}
+        onClose={() => modalSetter(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style} className={Styles["delete-modal-layout"]}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span>Types</span>
+              <button
+                className={Styles["btn-off"]}
+                onClick={() => modalSetter(!state)}
+              >
+                X
+              </button>
+            </div>
+            <div>{content}</div>
+          </Typography>
+        </Box>
+      </Modal>
     );
   }
   return (

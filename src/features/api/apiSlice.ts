@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_LINK } from "../../api/apis";
+import { number } from "yup";
+import { string } from "yup";
 const LIMIT_LINK: any = new URL(
   "https://6347eca8db76843976b5e973.mockapi.io/todos"
 );
@@ -16,7 +18,6 @@ function LinkParams(
   return LIMIT_LINK.href;
 }
 
-
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
@@ -31,21 +32,20 @@ export const apiSlice = createApi({
       providesTags: ["Todos"],
     }),
     getNewData: builder.query({
-      query: (page:number) =>{
-        return API_LINK + `?limit=10&page=${page}`
+      query: (page: number) => {
+        return API_LINK + `?limit=10&page=${page}`;
       },
       providesTags: ["Todos"],
-    
     }),
     fetchTodoLength: builder.query({
       query: () => API_LINK,
-      transformResponse: (res:any) => {
+      transformResponse: (res: any) => {
         return res.length;
       },
     }),
     addTodo: builder.mutation({
       query: (todo: any) => ({
-        url:API_LINK,
+        url: API_LINK,
         method: "POST",
         body: todo,
       }),
@@ -58,11 +58,18 @@ export const apiSlice = createApi({
       },
       providesTags: ["Todos"],
     }),
+    getSingleData: builder.query({
+      query: (id: string | number) => `/${id}`,
+      transformResponse: (res: any) => {
+        return res;
+      },
+      providesTags: ["Todos"],
+    }),
 
-    updateTodo: builder.mutation({
+    UpdateTodo: builder.mutation({
       query: (todo: any) => ({
-        url: `/todos/${todo.id}`,
-        method: "PATCH",
+        url: API_LINK + `/${todo.id}`,
+        method: "PUT",
         body: todo,
       }),
       invalidatesTags: ["Todos"],
@@ -82,9 +89,9 @@ export const {
   useGetTodosQuery,
   useGetDataQuery,
   useGetNewDataQuery,
+  useGetSingleDataQuery,
   useFetchTodoLengthQuery,
   useAddTodoMutation,
   useUpdateTodoMutation,
   useDeleteTodoMutation,
 } = apiSlice;
-

@@ -1,9 +1,29 @@
 .form-container {
   display: flex;
   flex-direction: column;
+
   padding: 1rem 1rem;
   border-radius: 10px;
   background-color: rgb(248, 248, 248);
   height: auto;
   gap: 1.2rem;
+}
+.btn {
+  position: absolute;
+  bottom: -20px;
+  left: 38%;
+  cursor: pointer;
+  border: none;
+  background-color: salmon;
+  font-size: larger;
+  height: 2.5rem;
+  width: 5rem;
+  border-radius: 10px;
+  z-index: 5;
+}
+.btn:hover {
+  font-weight: bold;
+  background-color: aliceblue;
+  color: black;
+  border: 1px solid black;
 }

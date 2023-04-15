@@ -6,20 +6,7 @@
   box-shadow: 2px 2px 4px #ddd;
   font-size: large;
 }
-.pallet-modal-layout {
-  display: flex;
 
-  position: absolute;
-
-  left: 35%;
-  top: 1rem;
-  z-index: 13;
-  padding: 1rem 1rem;
-
-  width: 28rem;
-  height: 17rem;
-  background-color: aliceblue;
-}
 .pallet-modal-layout {
   display: flex;
   flex-direction: column;
