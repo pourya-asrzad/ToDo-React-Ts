@@ -13,18 +13,21 @@ import { CircularProgress } from "@mui/material";
 import SkeletonComponent from "../../../card/skeleton.component";
 import { fakeArray, userOnline } from "../../../../utils/index.utils";
 import { useSelector, useDispatch } from "react-redux";
-import { setItems } from "../../../../features/slices/itemSlice";
+import itemSlice, { setItems } from "../../../../features/slices/itemSlice";
 import type { RootState } from "../../../../features/store/store";
 
 //////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 const RenderCards = (): ReactElement | ReactElement[] => {
   const itemsArry = useSelector((state: RootState) => state.itemSlice.items);
+  //const onEdit = useSelector((state: RootState) => state.itemSlice.editOperate);
+
   const dispatch = useDispatch();
 
   const [modalDelete, setModalDelete] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState<number>(2);
+  //const [content, setContent] = useState<any>(null);
   const {
     data: firstData,
     isSuccess,
@@ -47,6 +50,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
     }
     setPage(page + 1);
   };
+
   ///////////////////////////////////////////////
   return isSuccess && itemsArry && isLoading == false ? (
     <InfiniteScroll
@@ -68,6 +72,7 @@ const RenderCards = (): ReactElement | ReactElement[] => {
               state={modalDelete}
               key={item.id}
               info={item}
+              id={item.id}
             />
           </>
         );

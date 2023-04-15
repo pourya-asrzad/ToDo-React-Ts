@@ -1,24 +1,4 @@
 .pallet-modal-layout {
-  display: grid;
-  justify-items: center;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  background: linear-gradient(
-    90deg,
-    rgba(123, 134, 123, 0.4),
-    rgba(11, 11, 11, 0.4),
-    rgba(90, 88, 89, 0.4)
-  );
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100dvw;
-
-  margin-top: 1rem;
-  border-top: 12px solid rgb(89, 113, 119);
-  z-index: 10;
   transition: all ease-in-out 500ms;
 }
 .modal-off {
