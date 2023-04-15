@@ -97,7 +97,6 @@ const Form = ({
         const title = value.title;
         const date = value.date;
         const description = value.description;
-        console.log(title, date, description, todoType);
 
         ///// we use a action guard for check the action <if Add> add a new item else <Edit with update todo mutation>
         if (actiontype === "Add") {
@@ -122,8 +121,8 @@ const Form = ({
           });
         }
         if (actiontype === "Edit") {
-          arrayUpdate(items, id, title, description, dueDate, todoType);
-          updateTodo({ id, title, description, dueDate, todoType });
+          arrayUpdate(items, id, title, description, date, todoType);
+          updateTodo({ id, title, description, date, todoType });
 
           if (setOpen !== undefined) {
             setTimeout(() => {

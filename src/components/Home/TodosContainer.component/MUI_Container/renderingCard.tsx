@@ -47,18 +47,10 @@ const RenderCards = (): ReactElement | ReactElement[] => {
     dispatch(setItems([...itemsArry, ...newData]));
     if (itemsArry.length + newData.length === dataLength) {
       setHasMore(false);
-      console.log(itemsArry);
     }
     setPage(page + 1);
   };
 
-  // useEffect(() => {
-  //   setContent((prev: any) => {
-  //     prev =
-  //     return prev;
-  //   });
-  //   () => console.log("no");
-  // }, [isSuccess, isLoading, itemsArry, onEdit]);
   ///////////////////////////////////////////////
   return isSuccess && itemsArry && isLoading == false ? (
     <InfiniteScroll

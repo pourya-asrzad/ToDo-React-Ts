@@ -1,6 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import * as Yup from "yup";
 
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -8,13 +7,10 @@ import Styles from "./editPage.module.scss";
 import { RootState } from "../../features/store/store";
 import { useSelector, useDispatch } from "react-redux";
 import ColorTypes from "../Home/AddTodo.component/ResponsiveContainer.component/responsiveForm.component/types.component/types.component";
-import { useGetSingleDataQuery } from "../../features/api/apiSlice";
 import { useParams } from "react-router-dom";
 import Form from "../Home/AddTodo.component/ResponsiveContainer.component/responsiveForm.component/FormMUI/form.component";
-import { title } from "process";
 import { useNavigate } from "react-router-dom";
 import { hndleAction } from "../../features/slices/itemSlice";
-import { log } from "console";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -53,7 +49,6 @@ export default function EditPage({
     reason: "backdropClick" | "escapeKeyDown"
   ) => {
     if (reason === "backdropClick") {
-      console.log(reason);
     } else {
       setOpen(false);
     }
