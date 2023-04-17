@@ -32,13 +32,33 @@
   display: flex;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 320px) {
   .time {
+    // margin-right: 10px;
     position: absolute;
-    top: 25px;
-    width: 90px;
-    right: 55px;
+    top: 40px;
+    left: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #daf6ff;
+    text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
+    padding: 3px;
+    border-radius: 10px;
+    font-family: "Share Tech Mono", monospace;
+    color: #fff;
+    text-shadow: 0 0 0.15em #1da9cc;
+    filter: blur(0.007em);
+    white-space: nowrap;
+    background: #0f3854;
+    background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
+    font-size: 30px;
   }
+}
+
+input:focus-visible {
+  outline: 2px solid crimson;
+  border-radius: 3px;
 }
 
 .time {
