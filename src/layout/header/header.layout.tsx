@@ -2,7 +2,10 @@ import { TextField } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import "./header.layout.scss";
 import Clock from "../../components/clock/clock";
+import { useNavigate } from "react-router-dom";
+
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <header>
       <div className="header-childe">
@@ -15,6 +18,7 @@ const Header = () => {
               type="text"
               className="input-search"
               placeholder="Search !"
+              onClick={() => navigate("/SEARCH")}
             />
             <Search fontSize="large" />
           </div>
