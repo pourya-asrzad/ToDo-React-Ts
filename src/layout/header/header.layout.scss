@@ -56,6 +56,11 @@
   }
 }
 
+input:focus-visible {
+  outline: 2px solid crimson;
+  border-radius: 3px;
+}
+
 .time {
   margin-right: 10px;
   display: flex;

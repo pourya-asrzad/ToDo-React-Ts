@@ -1,5 +1,7 @@
+import SearchContainer from "../components/SearchPage/searchContainer/search.component";
+
 const SearchPage = () => {
-  return <div>SearchPage</div>;
+  return <SearchContainer />;
 };
 
 export default SearchPage;

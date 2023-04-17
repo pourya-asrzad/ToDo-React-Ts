@@ -1,4 +1,8 @@
-import searchResualt from "./list/list.component";
+import Header from "../../../layout/header/header.layout";
+import SearchResualt from "./list/list.component";
 
-const SearchContainer = () => {};
+const SearchContainer = () => {
+  let content = SearchResualt();
+  return <>{content}</>;
+};
 export default SearchContainer;
